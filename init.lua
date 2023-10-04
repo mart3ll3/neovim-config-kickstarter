@@ -81,6 +81,7 @@ require('lazy').setup({
   'nvim-lua/plenary.nvim',
   'nvim-pack/nvim-spectre',
   'ThePrimeagen/harpoon',
+  'prichrd/netrw.nvim',
 {
   "folke/flash.nvim",
   event = "VeryLazy",
@@ -759,6 +760,17 @@ require('lualine').setup {
 
 require("nvim-surround")
 require("flash").toggle(false)
+require'netrw'.setup{
+  -- Put your configuration here, or leave the object empty to take the default
+  -- configuration.
+  icons = {
+    symlink = '', -- Symlink icon (directory and file)
+    directory = '', -- Directory icon
+    file = '', -- File icon
+  },
+  use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
+  mappings = {}, -- Custom key mappings
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
