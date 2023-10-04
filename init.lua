@@ -279,7 +279,7 @@ require('lazy').setup({
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 vim.wo.relativenumber = true
 
 -- Make line numbers default
@@ -362,7 +362,7 @@ vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
 -- Clear highlights
-vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "Clear highlights" })
+vim.keymap.set("n", "<leader>hh", "<cmd>nohlsearch<CR>", { desc = "Clear highlights" })
 -- Close buffers
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete!<CR>", { desc = "Buffer Force Close" })
 
@@ -387,9 +387,9 @@ vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end, { desc = "Harpoon Fi
 vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc =  "Harpoon File #4"} )
 
 -- Fugitive shortcuts
-vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git Diff" })
-vim.keymap.set("n", "<leader>gd", "<cmd>Gdiff<CR>", { desc = "Git Status" })
-vim.keymap.set("n", "<leader>gb", "<cmd>Gblame<CR>", { desc = "Git Blame" })
+vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gd", "<cmd>Gdiff<CR>", { desc = "Git Diff" })
+vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<CR>", { desc = "Git Blame" })
 vim.keymap.set("n", "<leader>gP", "<cmd>Git push<CR>", { desc = "Git Push" })
 vim.keymap.set("n", "<leader>gp", "<cmd>Git pull<CR>", { desc = "Git Pull" })
 vim.keymap.set("n", "<leader>gl", "<cmd>Gclog<CR>", { desc = "Git Log File" })
@@ -452,8 +452,8 @@ vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({sele
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'python', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
-    'c_sharp' },
+  ensure_installed = { 'lua', 'python', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim'
+     },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -551,7 +551,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>K', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -589,7 +589,7 @@ local servers = {
       telemetry = { enable = false },
     },
   },
-  csharp_ls = {
+  omnisharp = {
     filetypes = { 'cs' }
   },
 
@@ -758,6 +758,7 @@ require('lualine').setup {
 
 
 require("nvim-surround")
+require("flash").toggle(false)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
