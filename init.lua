@@ -81,7 +81,8 @@ require('lazy').setup({
   'nvim-lua/plenary.nvim',
   'nvim-pack/nvim-spectre',
   'ThePrimeagen/harpoon',
-  'prichrd/netrw.nvim',
+  -- 'prichrd/netrw.nvim',
+  'nvim-tree/nvim-tree.lua',
 {
   "folke/flash.nvim",
   event = "VeryLazy",
@@ -321,6 +322,8 @@ vim.o.lines = 999
 vim.o.columns = 999
 vim.o.cursorline = true
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -341,7 +344,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat Document" })
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "Show Nvim Trw" })
+vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeFocus, { desc = "Show Nvim Tree" })
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Show UndoTree" })
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
@@ -358,7 +361,9 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go Window to the right" })
 vim.keymap.set("n", "<C-Up>", ":resize -2<CR>")
 vim.keymap.set("n", "<C-Down>", ":resize +2<CR>")
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-,>", ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
+vim.keymap.set("n", "<C-.>", ":vertical resize +2<CR>")
 -- Navigate buffers
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
@@ -760,17 +765,22 @@ require('lualine').setup {
 
 require("nvim-surround")
 require("flash").toggle(false)
-require'netrw'.setup{
-  -- Put your configuration here, or leave the object empty to take the default
-  -- configuration.
-  icons = {
-    symlink = '', -- Symlink icon (directory and file)
-    directory = '', -- Directory icon
-    file = '', -- File icon
+-- require'netrw'.setup{
+--   -- Put your configuration here, or leave the object empty to take the default
+--   -- configuration.
+--   icons = {
+--     symlink = '', -- Symlink icon (directory and file)
+--     directory = '', -- Directory icon
+--     file = '', -- File icon
+--   },
+--   use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
+--   mappings = {}, -- Custom key mappings
+-- }
+require("nvim-tree").setup({
+  view = {
+    width = 40,
   },
-  use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
-  mappings = {}, -- Custom key mappings
-}
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
