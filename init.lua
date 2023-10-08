@@ -371,6 +371,7 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
 vim.keymap.set("n", "<leader>hh", "<cmd>nohlsearch<CR>", { desc = "Clear highlights" })
 -- Close buffers
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete!<CR>", { desc = "Buffer Force Close" })
+vim.keymap.set("n", "<leader>ba", "<cmd>%bd<CR>", { desc = "Buffers Close All" })
 
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Vertically" })
