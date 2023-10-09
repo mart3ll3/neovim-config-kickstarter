@@ -181,16 +181,16 @@ require('lazy').setup({
     },
   },
 
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    config = function()
-      vim.cmd.colorscheme 'tokyonight'
-    end,
-  },
-
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {},
+  --   config = function()
+  --     vim.cmd.colorscheme 'tokyonight'
+  --   end,
+  -- },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -324,6 +324,7 @@ vim.o.cursorline = true
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.cmd.colorscheme "catppuccin"
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
