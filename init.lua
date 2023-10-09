@@ -783,6 +783,20 @@ require("nvim-tree").setup({
   },
 })
 
+  local bufferline = require('bufferline')
+  bufferline.setup {
+      options = {
+
+            offsets = {
+                {
+                    filetype = "NvimTree",
+                    text = "File Explorer"  ,
+                    text_align =  "center",
+                    separator = true
+                }
+            }
+      }
+  }
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --
