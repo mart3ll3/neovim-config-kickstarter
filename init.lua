@@ -83,6 +83,7 @@ require('lazy').setup({
   'ThePrimeagen/harpoon',
   -- 'prichrd/netrw.nvim',
   'nvim-tree/nvim-tree.lua',
+  'm4xshen/autoclose.nvim',
 {
   "folke/flash.nvim",
   event = "VeryLazy",
@@ -798,6 +799,9 @@ require("nvim-tree").setup({
             }
       }
   }
+
+
+require("autoclose").setup()
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --
