@@ -372,12 +372,13 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
 -- Clear highlights
 vim.keymap.set("n", "<leader>hh", "<cmd>nohlsearch<CR>", { desc = "Clear highlights" })
 -- Close buffers
-vim.keymap.set("n", "<leader>bd", "<cmd>bdelete!<CR>", { desc = "Buffer Force Close" })
-vim.keymap.set("n", "<leader>ba", "<cmd>%bd<CR>", { desc = "Buffers Close All" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete!<CR>", { desc = "[B]uffer Force [D]elete" })
+vim.keymap.set("n", "<leader>ba", "<cmd>%bd<CR>", { desc = "[B]uffers Close [A]ll" })
+vim.keymap.set("n", "<leader>bb", "<cmd>%bd|e#<CR>", { desc = "[B]uffers Close All [B]ut This" })
+vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "[B]uffer [N]ew " })
 
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Vertically" })
-vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
