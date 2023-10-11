@@ -209,6 +209,8 @@ require('lazy').setup({
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {"HiPhish/rainbow-delimiters.nvim"},
   {"rrethy/vim-illuminate"},
+  {"f-person/git-blame.nvim"},
+
   {
       "kylechui/nvim-surround",
       version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -318,7 +320,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
-vim.o.guifont = "FiraCode Nerd Font:h12.5"
+vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 vim.o.lines = 999
 vim.o.columns = 999
 vim.o.cursorline = true
@@ -404,6 +406,7 @@ vim.keymap.set("n", "<leader>gP", "<cmd>Git push<CR>", { desc = "Git Push" })
 vim.keymap.set("n", "<leader>gp", "<cmd>Git pull<CR>", { desc = "Git Pull" })
 vim.keymap.set("n", "<leader>gl", "<cmd>Gclog<CR>", { desc = "Git Log File" })
 vim.keymap.set("n", "<leader>gL", "<cmd>Gclog --<CR>", { desc = "Git All File" })
+vim.keymap.set("n", "<leader>gu", "<cmd>GitBlameOpenCommitURL<CR>", { desc = "Git Open Commit Url" })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
