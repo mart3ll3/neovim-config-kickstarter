@@ -407,6 +407,7 @@ vim.keymap.set("n", "<leader>gp", "<cmd>Git pull<CR>", { desc = "Git Pull" })
 vim.keymap.set("n", "<leader>gl", "<cmd>Gclog<CR>", { desc = "Git Log File" })
 vim.keymap.set("n", "<leader>gL", "<cmd>Gclog --<CR>", { desc = "Git All File" })
 vim.keymap.set("n", "<leader>gu", "<cmd>GitBlameOpenCommitURL<CR>", { desc = "Git Open Commit Url" })
+vim.keymap.set("n", "<leader>gU", "<cmd>GitBlameOpenFileURL<CR>", { desc = "Git Open File Url" })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
