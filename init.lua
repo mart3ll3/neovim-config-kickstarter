@@ -84,26 +84,6 @@ require('lazy').setup({
   -- 'prichrd/netrw.nvim',
   'nvim-tree/nvim-tree.lua',
   'm4xshen/autoclose.nvim',
-  'sindrets/diffview.nvim',
-{
-    "aaronhallaert/advanced-git-search.nvim",
-    config = function()
-        -- optional: setup telescope before loading the extension
-        require("telescope").setup{
-            -- move this to the place where you call the telescope setup function
-            extensions = {
-                advanced_git_search = {
-                        -- See Config
-                    }
-            }
-        }
-
-        require("telescope").load_extension("advanced_git_search")
-    end,
-    dependencies = {
-        --- See dependencies
-    },
-},
 {
   "folke/flash.nvim",
   event = "VeryLazy",
@@ -230,6 +210,8 @@ require('lazy').setup({
   {"HiPhish/rainbow-delimiters.nvim"},
   {"rrethy/vim-illuminate"},
   {"f-person/git-blame.nvim"},
+  {"nvim-treesitter/nvim-treesitter-context"},
+
 
   {
       "kylechui/nvim-surround",
@@ -400,7 +382,7 @@ vim.keymap.set("n", "<leader>bb", "<cmd>%bd|e#<CR>", { desc = "[B]uffers Close A
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "[B]uffer [N]ew " })
 
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
-vim.keymap.set("n", "<leader>ww", "<cmd>set wrap!<CR>", { desc = "Toggle Wrap Line" })
+vim.keymap.set("n", "<leader>ww", "<cmd>set wrap!<CR>", { desc = "Toggle [Wrap] lines" })
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Vertically" })
 
 -- Remap for dealing with word wrap
@@ -828,7 +810,6 @@ require("nvim-tree").setup({
 
 
 require("autoclose").setup()
-
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --
