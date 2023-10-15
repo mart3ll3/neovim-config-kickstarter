@@ -211,6 +211,8 @@ require('lazy').setup({
   {"rrethy/vim-illuminate"},
   {"f-person/git-blame.nvim"},
   {"nvim-treesitter/nvim-treesitter-context"},
+  {"Wansmer/treesj"},
+
 
 
   {
@@ -464,6 +466,7 @@ vim.keymap.set('n', '<leader>sR', require('telescope.builtin').resume, { desc = 
 vim.keymap.set('n', '<leader>sR', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>sr', '<cmd>lua require("spectre").toggle()<CR>', { desc = "Toggle Spectre" })
 vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', { desc = "Search current word Spectre" })
+vim.keymap.set('n', '<leader>j', require('treesj').toggle)
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -810,6 +813,7 @@ require("nvim-tree").setup({
 
 
 require("autoclose").setup()
+require('treesj').setup({--[[ your config ]]})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --
