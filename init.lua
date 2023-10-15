@@ -366,12 +366,14 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go Window to the down" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go Window to the up" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go Window to the right" })
 -- Resize with arrows
-vim.keymap.set("n", "<C-Up>", ":resize -2<CR>")
-vim.keymap.set("n", "<C-Down>", ":resize +2<CR>")
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>")
-vim.keymap.set("n", "<C-,>", ":vertical resize -2<CR>")
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
-vim.keymap.set("n", "<C-.>", ":vertical resize +2<CR>")
+vim.keymap.set("n", "<C-Up>", ":horizontal resize +2<CR>")
+vim.keymap.set("n", "<C-Down>", ":horizontal resize -2<CR>")
+vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
+vim.keymap.set("n", "<C-m>", ":vertical resize +2<CR>")
+vim.keymap.set("n", "<C-,>", ":horizontal resize +2<CR>")
+vim.keymap.set("n", "<C-Right>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-/>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-.>", ":horizontal resize -2<CR>")
 -- Navigate buffers
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
@@ -466,7 +468,7 @@ vim.keymap.set('n', '<leader>sR', require('telescope.builtin').resume, { desc = 
 vim.keymap.set('n', '<leader>sR', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>sr', '<cmd>lua require("spectre").toggle()<CR>', { desc = "Toggle Spectre" })
 vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', { desc = "Search current word Spectre" })
-vim.keymap.set('n', '<leader>j', require('treesj').toggle)
+vim.keymap.set('n', '<leader>J', require('treesj').toggle)
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
