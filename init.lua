@@ -338,6 +338,7 @@ vim.cmd.colorscheme "catppuccin"
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set("i", "jk", "<Esc>")
+vim.keymap.set("n", "gg", "go")
 
 --primeagean mappiings
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
