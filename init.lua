@@ -212,6 +212,7 @@ require('lazy').setup({
   {"f-person/git-blame.nvim"},
   {"nvim-treesitter/nvim-treesitter-context"},
   {"Wansmer/treesj"},
+  {"simrat39/symbols-outline.nvim"},
 
 
 
@@ -396,6 +397,9 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Harpoon shortcuts
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
+
+-- Outline
+vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { desc = "Show Outline for current buffer" })
 
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon Add File" })
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, {desc =  "Harpoon Toggle Quick menu"})
@@ -887,6 +891,8 @@ local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
     -- vim way: ; goes to the direction you were moving.
     vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
     vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+
+require("symbols-outline").setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
