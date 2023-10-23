@@ -83,7 +83,9 @@ require('lazy').setup({
   'ThePrimeagen/harpoon',
   -- 'prichrd/netrw.nvim',
   'nvim-tree/nvim-tree.lua',
-  'm4xshen/autoclose.nvim',
+  -- 'm4xshen/autoclose.nvim',
+	'windwp/nvim-autopairs',
+	'windwp/nvim-ts-autotag',
 {
   "folke/flash.nvim",
   event = "VeryLazy",
@@ -404,7 +406,7 @@ vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { desc = "Show Outli
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon Add File" })
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, {desc =  "Harpoon Toggle Quick menu"})
 
-vim.keymap.set("n", "<C-i>", function() ui.nav_file(1) end, { desc =  "Harpoon File #1" })
+vim.keymap.set("n", "<C-p>", function() ui.nav_file(1) end, { desc =  "Harpoon File #1" })
 vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end, { desc = "Harpoon File #2" })
 vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end, { desc = "Harpoon File #3" })
 vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc =  "Harpoon File #4"} )
@@ -883,7 +885,7 @@ require("nvim-tree").setup({
   }
 
 
-require("autoclose").setup()
+-- require("autoclose").setup()
 require('treesj').setup({--[[ your config ]]})
 
 local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
@@ -893,7 +895,11 @@ local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
     vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
 
 require("symbols-outline").setup()
+require("nvim-autopairs").setup({
+    disable_filetype = { 'TelescopePrompt', 'vim' }
+})
 
+require("nvim-ts-autotag").setup()
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --
