@@ -237,7 +237,8 @@ require('lazy').setup({
  },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  -- {'numToStr/Comment.nvim', opts = {} },
+  {"preservim/nerdcommenter"},
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -427,6 +428,11 @@ vim.keymap.set("n", "<leader>gU", "<cmd>GitBlameOpenFileURL<CR>", { desc = "Git 
 
 -- lazygit
 vim.keymap.set("n", "<leader>gs", vim.cmd.LazyGit)
+
+vim.api.nvim_set_var("NERDSpaceDelims", 1);
+-- shortcuts to toggle
+vim.api.nvim_set_keymap("n", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true});
+vim.api.nvim_set_keymap("v", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true});
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
