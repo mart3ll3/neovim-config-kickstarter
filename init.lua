@@ -215,6 +215,8 @@ require('lazy').setup({
   {"nvim-treesitter/nvim-treesitter-context"},
   {"Wansmer/treesj"},
   {"simrat39/symbols-outline.nvim"},
+  {"godlygeek/tabular"},
+  {"kdheepak/lazygit.nvim"},
 
 
 
@@ -421,6 +423,9 @@ vim.keymap.set("n", "<leader>gl", "<cmd>Gclog<CR>", { desc = "Git Log File" })
 vim.keymap.set("n", "<leader>gL", "<cmd>Gclog --<CR>", { desc = "Git All File" })
 vim.keymap.set("n", "<leader>gu", "<cmd>GitBlameOpenCommitURL<CR>", { desc = "Git Open Commit Url" })
 vim.keymap.set("n", "<leader>gU", "<cmd>GitBlameOpenFileURL<CR>", { desc = "Git Open File Url" })
+
+-- lazygit
+vim.keymap.set("n", "<leader>gs", vim.cmd.LazyGit)
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
