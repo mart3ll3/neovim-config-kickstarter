@@ -214,7 +214,8 @@ require('lazy').setup({
   {"f-person/git-blame.nvim"},
   {"nvim-treesitter/nvim-treesitter-context"},
   {"Wansmer/treesj"},
-  {"simrat39/symbols-outline.nvim"},
+  -- {"simrat39/symbols-outline.nvim"},
+  {"stevearc/aerial.nvim"},
   {"godlygeek/tabular"},
   {"kdheepak/lazygit.nvim"},
 
@@ -403,7 +404,7 @@ local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
 -- Outline
-vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { desc = "Show Outline for current buffer" })
+vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>", { desc = "Show Outline for current buffer" })
 
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon Add File" })
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, {desc =  "Harpoon Toggle Quick menu"})
@@ -899,7 +900,8 @@ local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
     vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
     vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
 
-require("symbols-outline").setup()
+-- require("symbols-outline").setup()
+require("aerial").setup()
 require("nvim-autopairs").setup({
     disable_filetype = { 'TelescopePrompt', 'vim' }
 })
