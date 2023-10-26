@@ -335,6 +335,7 @@ vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 vim.o.lines = 999
 vim.o.columns = 999
 vim.o.cursorline = true
+vim.opt.synmaxcol = 300 
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -431,8 +432,8 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.LazyGit)
 
 vim.api.nvim_set_var("NERDSpaceDelims", 1);
 -- shortcuts to toggle
-vim.api.nvim_set_keymap("n", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true});
-vim.api.nvim_set_keymap("v", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true});
+vim.api.nvim_set_keymap("n", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true, silent = true});
+vim.api.nvim_set_keymap("v", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true, silent = true});
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
