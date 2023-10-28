@@ -170,13 +170,13 @@ require('lazy').setup({
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
-        vim.keymap.set({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then return ']c' end
+        vim.keymap.set({ 'n', 'v' }, ']h', function()
+          if vim.wo.diff then return ']h' end
           vim.schedule(function() gs.next_hunk() end)
           return '<Ignore>'
         end, { expr = true, buffer = bufnr, desc = "Jump to next hunk" })
-        vim.keymap.set({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then return '[c' end
+        vim.keymap.set({ 'n', 'v' }, '[h', function()
+          if vim.wo.diff then return '[h' end
           vim.schedule(function() gs.prev_hunk() end)
           return '<Ignore>'
         end, { expr = true, buffer = bufnr, desc = "Jump to previous hunk" })
@@ -210,6 +210,7 @@ require('lazy').setup({
 
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {"HiPhish/rainbow-delimiters.nvim"},
+
   {"rrethy/vim-illuminate"},
   {"f-person/git-blame.nvim"},
   {"nvim-treesitter/nvim-treesitter-context"},
@@ -218,6 +219,7 @@ require('lazy').setup({
   {"stevearc/aerial.nvim"},
   {"godlygeek/tabular"},
   {"kdheepak/lazygit.nvim"},
+  {"LunarVim/bigfile.nvim"},
 
 
 
@@ -361,6 +363,11 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat Document" })
 vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, { desc = "Show Nvim Tree" })
+vim.keymap.set("n", "<leader>fu", ":NvimTreeResize -10<cr>", { desc = "Enlarge Nvim Tree" })
+vim.keymap.set("n", "<leader>fi", ":NvimTreeResize +10<cr>", { desc = "Make smaller Nvim Tree" })
+vim.keymap.set("n", "<leader>ff", vim.cmd.NvimTreeFindFile)
+vim.keymap.set("n", "<leader>fd", vim.cmd.NvimTreeCollapse)
+
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Show UndoTree" })
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
@@ -407,6 +414,13 @@ local ui = require("harpoon.ui")
 
 -- Outline
 vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>", { desc = "Show Outline for current buffer" })
+require("aerial").setup({
+	on_attach = function(bufnr)
+		-- Jump forwards/backwards with '{' and '}'
+		vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+		vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+	end,
+})
 
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon Add File" })
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, {desc =  "Harpoon Toggle Quick menu"})
@@ -434,6 +448,41 @@ vim.api.nvim_set_var("NERDSpaceDelims", 1);
 -- shortcuts to toggle
 vim.api.nvim_set_keymap("n", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true, silent = true});
 vim.api.nvim_set_keymap("v", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true, silent = true});
+
+vim.keymap.set("n", "<leader>cf", "0<c-g>", { desc = "Show full file path" })
+
+-- jump list + buffer
+function jumps_fileCO(direction)
+	-- Default to jumping backward if no direction is specified
+	direction = direction or "backward"
+
+	local current_buffer = vim.fn.bufnr()
+	local last_file = vim.fn.bufname()
+
+	local jump_command = ""
+	if direction == "backward" then
+		jump_command = "normal! <c-o>"
+	elseif direction == "forward" then
+		jump_command = "normal! 1<c-i>"
+	end
+
+	while true do
+		vim.cmd(vim.api.nvim_replace_termcodes(jump_command, true, true, true))
+		if vim.fn.bufnr() == current_buffer then
+			if vim.fn.bufname() == last_file then
+				break
+			else
+				last_file = vim.fn.bufname()
+			end
+		else
+			break
+		end
+	end
+end
+
+vim.keymap.set("n", "<c-;>", "<cmd>lua jumps_fileCO('forward')<cr>", { desc = "Next buffer in jump list" })
+vim.keymap.set("n", "<c-g>", "<cmd>lua jumps_fileCO()<cr>", { desc = "Prev buffer in jump list" })
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -918,3 +967,26 @@ require("nvim-ts-autotag").setup()
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --
+--
+require("bigfile").setup {
+  -- filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
+  pattern = function(bufnr, filesize_mib)
+    -- you can't use `nvim_buf_line_count` because this runs on BufReadPre
+    local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
+    local file_length = #file_contents
+    local filetype = vim.filetype.match({ buf = bufnr })
+    if file_length > 5000 and filetype == "cs" then
+      return true
+    end
+  end,
+  features = { -- features to disable
+    "indent_blankline",
+    "illuminate",
+    -- "lsp",
+    -- "treesitter",
+    -- "syntax",
+    -- "matchparen",
+    -- "vimopts",
+    -- "filetype",
+  },
+}
