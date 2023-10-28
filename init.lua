@@ -360,12 +360,12 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat Document" })
+vim.keymap.set({ "n", "v" }, "<leader>dd", [["_d]])
+vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "[F]ormat Document" })
 vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, { desc = "Show Nvim Tree" })
 vim.keymap.set("n", "<leader>fu", ":NvimTreeResize -10<cr>", { desc = "Enlarge Nvim Tree" })
 vim.keymap.set("n", "<leader>fi", ":NvimTreeResize +10<cr>", { desc = "Make smaller Nvim Tree" })
-vim.keymap.set("n", "<leader>ff", vim.cmd.NvimTreeFindFile)
+vim.keymap.set("n", "<leader>fs", vim.cmd.NvimTreeFindFile)
 vim.keymap.set("n", "<leader>fd", vim.cmd.NvimTreeCollapse)
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Show UndoTree" })
@@ -674,8 +674,8 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
--- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 vim.keymap.set("n", "<leader>qq", ":qa!<CR>")
 
 -- [[ Configure LSP ]]
