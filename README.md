@@ -75,7 +75,6 @@ Examples of usage:
 <leader>e - toggle file tree view
 <leader>fu - make smaller tree view
 <leader>fi - enlarge tree view
-<leader>ff - format document
 
 <leader>u - toggle undotree (local history of changes on document)
 
@@ -101,14 +100,16 @@ C-g - previous buffer in jump list
 
 <leader>J - toggle wrap parameters, text in element etc
 
-<leader>dt - show diagnostics for whole folder
 
 ### Code view/manipulation shortcuts
 
 <leader>gs - Lazygit
+<leader>dt - show diagnostics for whole folder
 
 ,c - toggle comment line or visualized block
 <leader>cc - comment line
+
+<leader>ff - format document
 
 gd - go to definition
 gr - go to references
@@ -121,6 +122,8 @@ C-p - previous option in intellisense
 Tab - confirm select or 1st option in intellisense
 
 Keymaps for objects from treesitter (parser)
+This could be used either when text is visually selected or by some vim motion
+Shortcuts here are inside appostrophes, this is just copy/paste from lua config
 
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
