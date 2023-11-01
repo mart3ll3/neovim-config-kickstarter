@@ -32,12 +32,14 @@ Location
 
 :e! - force reload language server
 
-:Mes - show history of messages
+:mes - show history of messages
 
 ### Shortcuts
 escape or double escape or q - close modal windows
+C means control with some key after dash (for exmample C-u means control with key u) 
+S means shift with some key after dash (for exmample S-h means control with key h) 
 
-<leader> - set to space atm
+<leader> - is set to key space atm
 jk - go to normal mode
 
 <leader>qq - force close all buffers and close neovim
@@ -73,10 +75,11 @@ C-t - Harpoon file #2
 C-n - Harpoon file #3
 C-s - Harpoon file #4
 
-<leader>gs - Lazygit
-
-,c - toggle comment line or visualized block
-cc - comment line
+<leader>sj - show jump list
+C-o - jump to previous position 
+C-i - jump forward in position history
+C-; - next buffer in jump list
+C-g - previous buffer in jump list
 
 <leader>cf - show file path
 
@@ -84,7 +87,12 @@ cc - comment line
 
 <leader>dt - show diagnostics for whole folder
 
-### Code shortcuts
+### Code view/manipulation shortcuts
+
+<leader>gs - Lazygit
+
+,c - toggle comment line or visualized block
+<leader>cc - comment line
 
 gd - go to definition
 gr - go to references
