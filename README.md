@@ -52,6 +52,22 @@ C-l - go to right window
 C-j - go to window below
 C-k - go to window up
 
+Jump to location on shown text - plugin [Flash](https://github.com/folke/flash.nvim)
+s + 1 or 2 chars of positionand confirmation by another letter will jump to that position
+
+Surround text - plugin [nvim-surround](https://github.com/kylechui/nvim-surround)
+Examples of usage:
+    Old text                    Command         New text
+--------------------------------------------------------------------------------
+    surr*ound_words             ysiw)           (surround_words)
+    *make strings               ys$"            "make strings"
+    [delete ar*ound me!]        ds]             delete around me!
+    remove <b>HTML t*ags</b>    dst             remove HTML tags
+    'change quot*es'            cs'"            "change quotes"
+    <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+    delete(functi*on calls)     dsf             function calls
+
+
 
 <leader>sf - fuzzy find file by file name 
 <leader>sg - fuzzy find string
@@ -97,7 +113,7 @@ C-g - previous buffer in jump list
 gd - go to definition
 gr - go to references
 gI - go to implementation
-ca - code action
+<leader>ca - code action
 K - hover documentation (another K jumps into that window)
 gD - go to declaration
 C-n - next option in intellisense
