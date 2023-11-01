@@ -1,159 +1,186 @@
 # kickstart.nvim
 
-https://github.com/kdheepak/kickstart.nvim/assets/1813121/f3ff9a2b-c31f-44df-a4fa-8a0d7b17cf7b
+### Prerequisities
+Neovim
+[git](https://cli.github.com/)
+[make](https://www.gnu.org/software/make/)
+[pip](https://pypi.org/project/pip/)
+[python](https://www.python.org/)
+[npm](https://npmjs.com/)
+[node](https://nodejs.org/)
+[cargo](https://www.rust-lang.org/tools/install)
+[ripgrep](https://github.com/BurntSushi/ripgrep)
+[fd](https://github.com/sharkdp/fd) 
 
-### Introduction
-
-A starting point for Neovim that is:
-
-* Small
-* Single-file (with examples of moving to multi-file)
-* Documented
-* Modular
-
-This repo is meant to be used by **YOU** to begin your Neovim journey; remove the things you don't use and add what you miss.
-
-Kickstart.nvim targets *only* the latest ['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest ['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim. If you are experiencing issues, please make sure you have the latest versions.
-
-Distribution Alternatives:
-- [LazyVim](https://www.lazyvim.org/): A delightful distribution maintained by @folke (the author of lazy.nvim, the package manager used here)
+lazygit (optional)
+[NERD font](https://www.nerdfonts.com/) -- one is enough, for example "JetBrainsMono Nerd Font"
 
 ### Installation
+Overwrite nvim config folder
+Location
 
-> **NOTE** 
-> [Backup](#FAQ) your previous configuration (if any exists)
+### Commands
+:Lazy - update plugins
 
-Requirements:
-* Make sure to review the readmes of the plugins if you are experiencing errors. In particular:
-  * [ripgrep](https://github.com/BurntSushi/ripgrep#installation) is required for multiple [telescope](https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies) pickers.
-* See [Windows Installation](#Windows-Installation) if you have trouble with `telescope-fzf-native`
+:Mason - install/update/remove language servers, formaters, linters
+  i - install
+  u - update
+  X - remove
 
-Neovim's configurations are located under the following paths, depending on your OS:
+:MasonInstall - install specific version
+  for example :MasonInstall omnisharp@v1.39.8
 
-| OS | PATH |
-| :- | :--- |
-| Linux | `$XDG_CONFIG_HOME/nvim`, `~/.config/nvim` |
-| MacOS | `$XDG_CONFIG_HOME/nvim`, '~/.config/nvim` |
-| Windows | `%userprofile%\AppData\Local\nvim\` |
+:e! - force reload language server
 
-Clone kickstart.nvim:
+:Mes - show history of messages
 
-```sh
-# on Linux and Mac
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-# on Windows
-git clone https://github.com/nvim-lua/kickstart.nvim.git %userprofile%\AppData\Local\nvim\ 
-```
+### Shortcuts
+escape or double escape or q - close modal windows
 
-### Post Installation
+<leader> - set to space atm
+jk - go to normal mode
 
-Run the following command and then **you are ready to go**!
-
-```sh
-nvim --headless "+Lazy! sync" +qa
-```
-
-### Recommended Steps
-
-[Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo (so that you have your own copy that you can modify) and then installing you can install to your machine using the methods above.
-
-> **NOTE**  
-> Your fork's url will be something like this: `https://github.com/<your_github_username>/kickstart.nvim.git`
-
-### Configuration And Extension
-
-* Inside of your copy, feel free to modify any file you like! It's your copy!
-* Feel free to change any of the default options in `init.lua` to better suit your needs.
-* For adding plugins, there are 3 primary options:
-  * Add new configuration in `lua/custom/plugins/*` files, which will be auto sourced using `lazy.nvim` (uncomment the line importing the `custom/plugins` directory in the `init.lua` file to enable this)
-  * Modify `init.lua` with additional plugins.
-  * Include the `lua/kickstart/plugins/*` files in your configuration.
-
-You can also merge updates/changes from the repo back into your fork, to keep up-to-date with any changes for the default configuration.
-
-#### Example: Adding an autopairs plugin
-
-In the file: `lua/custom/plugins/autopairs.lua`, add:
-
-```lua
--- File: lua/custom/plugins/autopairs.lua
-
-return {
-  "windwp/nvim-autopairs",
-  -- Optional dependency
-  dependencies = { 'hrsh7th/nvim-cmp' },
-  config = function()
-    require("nvim-autopairs").setup {}
-    -- If you want to automatically add `(` after selecting a function or method
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-    local cmp = require('cmp')
-    cmp.event:on(
-      'confirm_done',
-      cmp_autopairs.on_confirm_done()
-    )
-  end,
-}
-```
+<leader>qq - force close all buffers and close neovim
+<leader>bd - close buffer
+<leader>wd - close window
+S-h - go to left buffer
+S-l - go to right buffer
+C-h - go to left window
+C-l - go to right window
+C-j - go to window below
+C-k - go to window up
 
 
-This will automatically install [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs) and enable it on startup. For more information, see documentation for [lazy.nvim](https://github.com/folke/lazy.nvim).
+<leader>sf - fuzzy find file by file name 
+<leader>sg - fuzzy find string
 
-#### Example: Adding a file tree plugin
+<leader>e - toggle file tree view
+<leader>fu - make smaller tree view
+<leader>fi - enlarge tree view
+<leader>ff - format document
 
-In the file: `lua/custom/plugins/filetree.lua`, add:
+<leader>u - toggle undotree (local history of changes on document)
 
-```lua
--- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+<leader>o - toggle outline
+} - next symbol from outline
+{ - previous symbol from outline
 
-return {
-  "nvim-neo-tree/neo-tree.nvim",
-  version = "*",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-    "MunifTanjim/nui.nvim",
-  },
-  config = function ()
-    require('neo-tree').setup {}
-  end,
-}
-```
+Harpoon - quick switching between up to 4 files
+<leader>a - Harpoon add file 
+C-e - toggle Harpoon quick menu
+C-p - Harpoon file #1
+C-t - Harpoon file #2
+C-n - Harpoon file #3
+C-s - Harpoon file #4
 
-This will install the tree plugin and add the command `:Neotree` for you. You can explore the documentation at [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) for more information.
+<leader>gs - Lazygit
 
-### Contribution
+,c - toggle comment line or visualized block
+cc - comment line
 
-Pull-requests are welcome. The goal of this repo is not to create a Neovim configuration framework, but to offer a starting template that shows, by example, available features in Neovim. Some things that will not be included:
+<leader>cf - show file path
 
-* Custom language server configuration (null-ls templates)
-* Theming beyond a default colorscheme necessary for LSP highlight groups
+<leader>J - toggle wrap parameters, text in element etc
 
-Each PR, especially those which increase the line count, should have a description as to why the PR is necessary.
+<leader>dt - show diagnostics for whole folder
 
-### FAQ
+### Code shortcuts
 
-* What should I do if I already have a pre-existing neovim configuration?
-  * You should back it up, then delete all files associated with it.
-  * This includes your existing init.lua and the neovim files in `~/.local` which can be deleted with `rm -rf ~/.local/share/nvim/`
-  * You may also want to look at the [migration guide for lazy.nvim](https://github.com/folke/lazy.nvim#-migration-guide)
-* What if I want to "uninstall" this configuration:
-  * See [lazy.nvim uninstall](https://github.com/folke/lazy.nvim#-uninstalling) information
-* Are there any cool videos about this plugin?
-  * Current iteration of kickstart (coming soon)
-  * Here is one about the previous iteration of kickstart: [video introduction to Kickstart.nvim](https://youtu.be/stqUbv-5u2s). Note the install via init.lua no longer works as specified. Please follow the install instructions in this file instead as they're up to date.
+gd - go to definition
+gr - go to references
+gI - go to implementation
+ca - code action
+K - hover documentation (another K jumps into that window)
+gD - go to declaration
+C-n - next option in intellisense
+C-p - previous option in intellisense
+Tab - confirm select or 1st option in intellisense
 
-### Windows Installation
+Keymaps for objects from treesitter (parser)
 
-Installation may require installing build tools, and updating the run command for `telescope-fzf-native`
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
+        ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
+        ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
+        ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
 
-See `telescope-fzf-native` documentation for [more details](https://github.com/nvim-telescope/telescope-fzf-native.nvim#installation)
+        -- works for javascript/typescript files (custom capture I created in after/queries/ecma/textobjects.scm)
+        ["a:"] = { query = "@property.outer", desc = "Select outer part of an object property" },
+        ["i:"] = { query = "@property.inner", desc = "Select inner part of an object property" },
+        ["l:"] = { query = "@property.lhs", desc = "Select left part of an object property" },
+        ["r:"] = { query = "@property.rhs", desc = "Select right part of an object property" },
 
-This requires:
+        ["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
+        ["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
 
-- Install CMake, and the Microsoft C++ Build Tools on Windows
+        ["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
+        ["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
 
-```lua
-{'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-```
+        ["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
+        ["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
+
+        ["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
+        ["if"] = { query = "@call.inner", desc = "Select inner part of a function call" },
+
+        ["am"] = { query = "@function.outer", desc = "Select outer part of a method/function definition" },
+        ["im"] = { query = "@function.inner", desc = "Select inner part of a method/function definition" },
+
+        ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
+        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
+        ["<leader>n:"] = "@property.outer", -- swap object property with next
+        ["<leader>nm"] = "@function.outer", -- swap function with next
+      },
+      swap_previous = {
+        ["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
+        ["<leader>p:"] = "@property.outer", -- swap object property with prev
+        ["<leader>pm"] = "@function.outer", -- swap function with previous
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]f"] = { query = "@call.outer", desc = "Next function call start" },
+        ["]m"] = { query = "@function.outer", desc = "Next method/function def start" },
+        ["]c"] = { query = "@class.outer", desc = "Next class start" },
+        ["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
+        ["]l"] = { query = "@loop.outer", desc = "Next loop start" },
+
+        -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
+        -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
+        ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+        ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+      },
+      goto_next_end = {
+        ["]F"] = { query = "@call.outer", desc = "Next function call end" },
+        ["]M"] = { query = "@function.outer", desc = "Next method/function def end" },
+        ["]C"] = { query = "@class.outer", desc = "Next class end" },
+        ["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
+        ["]L"] = { query = "@loop.outer", desc = "Next loop end" },
+      },
+      goto_previous_start = {
+        ["[f"] = { query = "@call.outer", desc = "Prev function call start" },
+        ["[m"] = { query = "@function.outer", desc = "Prev method/function def start" },
+        ["[c"] = { query = "@class.outer", desc = "Prev class start" },
+        ["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
+        ["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
+      },
+      goto_previous_end = {
+        ["[F"] = { query = "@call.outer", desc = "Prev function call end" },
+        ["[M"] = { query = "@function.outer", desc = "Prev method/function def end" },
+        ["[C"] = { query = "@class.outer", desc = "Prev class end" },
+        ["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
+        ["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
+      },
+    },
+
+
+
 
