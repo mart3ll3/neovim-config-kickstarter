@@ -76,7 +76,7 @@ leader-e - toggle file tree view
 leader-fu - make smaller tree view
 leader-fi - enlarge tree view
 
--leader-u - toggle undotree (local history of changes on document)
+leader-u - toggle undotree (local history of changes on document)
 
 leader-o - toggle outline
 } - next symbol from outline
