@@ -39,12 +39,12 @@ escape or double escape or q - close modal windows
 C means control with some key after dash (for exmample C-u means control with key u) 
 S means shift with some key after dash (for exmample S-h means control with key h) 
 
-<leader> - is set to key space atm
+leader - is set to key space atm
 jk - go to normal mode
 
-"<leader>qq" - force close all buffers and close neovim
-<leader>bd - close buffer
-<leader>wd - close window
+leader-qq - force close all buffers and close neovim
+leader-bd - close buffer
+leader-wd - close window
 S-h - go to left buffer
 S-l - go to right buffer
 C-h - go to left window
@@ -69,52 +69,52 @@ Examples of usage:
 
 
 
-<leader>sf - fuzzy find file by file name 
-<leader>sg - fuzzy find string
+leader-sf - fuzzy find file by file name 
+leader-sg - fuzzy find string
 
-<leader>e - toggle file tree view
-<leader>fu - make smaller tree view
-<leader>fi - enlarge tree view
+leader-e - toggle file tree view
+leader-fu - make smaller tree view
+leader-fi - enlarge tree view
 
-<leader>u - toggle undotree (local history of changes on document)
+-leader-u - toggle undotree (local history of changes on document)
 
-<leader>o - toggle outline
+leader-o - toggle outline
 } - next symbol from outline
 { - previous symbol from outline
 
 Harpoon - quick switching between up to 4 files
-<leader>a - Harpoon add file 
+leader-a - Harpoon add file 
 C-e - toggle Harpoon quick menu
 C-p - Harpoon file #1
 C-t - Harpoon file #2
 C-n - Harpoon file #3
 C-s - Harpoon file #4
 
-<leader>sj - show jump list
+leader-sj - show jump list
 C-o - jump to previous position 
 C-i - jump forward in position history
 C-; - next buffer in jump list
 C-g - previous buffer in jump list
 
-<leader>cf - show file path
+leader-cf - show file path
 
-<leader>J - toggle wrap parameters, text in element etc
+leader-J - toggle wrap parameters, text in element etc
 
 
 ### Code view/manipulation shortcuts
 
-<leader>gs - Lazygit
-<leader>dt - show diagnostics for whole folder
+leader-gs - Lazygit
+leader-dt - show diagnostics for whole folder
 
 ,c - toggle comment line or visualized block
-<leader>cc - comment line
+leader-cc - comment line
 
-<leader>ff - format document
+leader-ff - format document
 
 gd - go to definition
 gr - go to references
 gI - go to implementation
-<leader>ca - code action
+leader-ca - code action
 K - hover documentation (another K jumps into that window)
 gD - go to declaration
 C-n - next option in intellisense
