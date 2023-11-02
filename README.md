@@ -5,7 +5,7 @@ Neovim
 
 [git](https://cli.github.com/)
 
-[make](https://www.gnu.org/software/make/)
+[make](https://www.gnu.org/software/make/) (on Windows Microsoft C++ Build Tools)
 
 [pip](https://pypi.org/project/pip/)
 
