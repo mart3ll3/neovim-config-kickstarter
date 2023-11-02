@@ -2,6 +2,7 @@
 
 ### Prerequisities
 Neovim
+
 [git](https://cli.github.com/)
 
 [make](https://www.gnu.org/software/make/)
