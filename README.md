@@ -70,6 +70,7 @@ s + 1 or 2 chars of positionand confirmation by another letter will jump to that
 
 Surround text - plugin [nvim-surround](https://github.com/kylechui/nvim-surround)
 Examples of usage:
+
     Old text                    Command         New text
 --------------------------------------------------------------------------------
     surr*ound_words             ysiw)           (surround_words)
