@@ -46,6 +46,7 @@ Location
 :mes - show history of messages
 
 ### Shortcuts
+```
 escape or double escape or q - close modal windows
 C means control with some key after dash (for exmample C-u means control with key u) 
 S means shift with some key after dash (for exmample S-h means control with key h) 
@@ -62,6 +63,7 @@ C-h - go to left window
 C-l - go to right window
 C-j - go to window below
 C-k - go to window up
+```
 
 Jump to location on shown text - plugin [Flash](https://github.com/folke/flash.nvim)
 s + 1 or 2 chars of positionand confirmation by another letter will jump to that position
@@ -79,7 +81,8 @@ Examples of usage:
     delete(functi*on calls)     dsf             function calls
 
 
-
+Other shortcuts:
+```
 leader-sf - fuzzy find file by file name 
 leader-sg - fuzzy find string
 
@@ -110,10 +113,11 @@ C-g - previous buffer in jump list
 leader-cf - show file path
 
 leader-J - toggle wrap parameters, text in element etc
+```
 
 
 ### Code view/manipulation shortcuts
-
+```
 leader-gs - Lazygit
 leader-dt - show diagnostics for whole folder
 
@@ -131,6 +135,7 @@ gD - go to declaration
 C-n - next option in intellisense
 C-p - previous option in intellisense
 Tab - confirm select or 1st option in intellisense
+```
 
 Keymaps for objects from treesitter (parser)
 This could be used either when text is visually selected or by some vim motion
