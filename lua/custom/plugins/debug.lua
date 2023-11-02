@@ -6,6 +6,55 @@
 -- be extended to other languages as well. That's why it's called
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
+vim.g.dotnet_build_project = function()
+    local default_path = vim.fn.getcwd() .. '/'
+    if vim.g['dotnet_last_proj_path'] ~= nil then
+        default_path = vim.g['dotnet_last_proj_path']
+    end
+    local path = vim.fn.input('Path to your *proj file', default_path, 'file')
+    vim.g['dotnet_last_proj_path'] = path
+    local cmd = 'dotnet build -c Debug ' .. path .. ' > /dev/null'
+    print('')
+    print('Cmd to execute: ' .. cmd)
+    local f = os.execute(cmd)
+    if f == 0 then
+        print('\nBuild: ✔️ ')
+    else
+        print('\nBuild: ❌ (code: ' .. f .. ')')
+    end
+end
+
+vim.g.dotnet_get_dll_path = function()
+    local request = function()
+        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+    end
+
+    if vim.g['dotnet_last_dll_path'] == nil then
+        vim.g['dotnet_last_dll_path'] = request()
+    else
+        if vim.fn.confirm('Do you want to change the path to dll?\n' .. vim.g['dotnet_last_dll_path'], '&yes\n&no', 2) == 1 then
+            vim.g['dotnet_last_dll_path'] = request()
+        end
+    end
+
+    return vim.g['dotnet_last_dll_path']
+end
+
+local configDotnet = {
+  {
+    type = "coreclr",
+    name = "launch - netcoredbg",
+    request = "launch",
+    program = function()
+        if vim.fn.confirm('Should I recompile first?', '&yes\n&no', 2) == 1 then
+            vim.g.dotnet_build_project()
+        end
+        return vim.g.dotnet_get_dll_path()
+    end,
+  },
+}
+
+
 return {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
@@ -43,11 +92,11 @@ return {
     }
 
     -- Basic debugging keymaps, feel free to change to your liking!
-    vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
-    vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
-    vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
-    vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
-    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
+    vim.keymap.set('n', '<F9>', dap.continue, { desc = 'Debug: Start/Continue' })
+    vim.keymap.set('n', '<F7>', dap.step_into, { desc = 'Debug: Step Into' })
+    vim.keymap.set('n', '<F8>', dap.step_over, { desc = 'Debug: Step Over' })
+    vim.keymap.set('n', '<S-F8>', dap.step_out, { desc = 'Debug: Step Out' })
+    vim.keymap.set('n', '<leader>bb', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
@@ -75,12 +124,14 @@ return {
     }
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
+    vim.keymap.set('n', '<F1>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
+    dap.configurations.cs = configDotnet
+    dap.configurations.fsharp = configDotnet
     -- Install golang specific config
     require('dap-go').setup()
   end,

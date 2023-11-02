@@ -284,7 +284,7 @@ require('lazy').setup({
     'akinsho/bufferline.nvim',
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons'
-  }
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -297,6 +297,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+  --
   -- { import = 'custom.plugins' },
 }, {})
 
@@ -405,7 +406,7 @@ vim.keymap.set("n", "<leader>hh", "<cmd>nohlsearch<CR>", { desc = "Clear highlig
 -- Close buffers
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete!<CR>", { desc = "[B]uffer Force [D]elete" })
 vim.keymap.set("n", "<leader>ba", "<cmd>bufdo bwipeout<cr>", { desc = "[B]uffers Close [A]ll" })
-vim.keymap.set("n", "<leader>bb", "<cmd>%bd|e#<CR>", { desc = "[B]uffers Close All [B]ut This" })
+-- vim.keymap.set("n", "<leader>bb", "<cmd>%bd|e#<CR>", { desc = "[B]uffers Close All [B]ut This" })
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "[B]uffer [N]ew " })
 
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
