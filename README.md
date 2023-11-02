@@ -3,16 +3,26 @@
 ### Prerequisities
 Neovim
 [git](https://cli.github.com/)
+
 [make](https://www.gnu.org/software/make/)
+
 [pip](https://pypi.org/project/pip/)
+
 [python](https://www.python.org/)
+
 [npm](https://npmjs.com/)
+
 [node](https://nodejs.org/)
+
 [cargo](https://www.rust-lang.org/tools/install)
+
 [ripgrep](https://github.com/BurntSushi/ripgrep)
+
 [fd](https://github.com/sharkdp/fd) 
 
+
 lazygit (optional)
+
 [NERD font](https://www.nerdfonts.com/) -- one is enough, for example "JetBrainsMono Nerd Font"
 
 ### Installation
