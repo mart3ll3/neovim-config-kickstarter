@@ -42,7 +42,7 @@ S means shift with some key after dash (for exmample S-h means control with key 
 <leader> - is set to key space atm
 jk - go to normal mode
 
-<leader>qq - force close all buffers and close neovim
+"<leader>qq" - force close all buffers and close neovim
 <leader>bd - close buffer
 <leader>wd - close window
 S-h - go to left buffer
