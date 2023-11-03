@@ -206,6 +206,7 @@ require('lazy').setup({
     opts = {},
   },
   {"nyoom-engineering/oxocarbon.nvim"},
+  { 'rose-pine/neovim', name = 'rose-pine' },
   { "zaldih/themery.nvim" },
   {
     -- Set lualine as statusline
@@ -1049,6 +1050,14 @@ require("themery").setup({
       ]],
     },
     {
+      name = "Rosepine Dawn",
+      colorscheme = "rose-pine",
+      before = [[
+        -- All this block will be executed before apply "set colorscheme"
+        vim.opt.background = "light"
+      ]],
+    },
+    {
       name = "Gruvbox dark",
       colorscheme = "gruvbox",
       before = [[
@@ -1091,6 +1100,14 @@ require("themery").setup({
     {
       name = "Oxocarbon Dark",
       colorscheme = "oxocarbon",
+      before = [[
+        -- All this block will be executed before apply "set colorscheme"
+        vim.opt.background = "dark"
+      ]],
+    },
+    {
+      name = "Rosepine Main",
+      colorscheme = "rose-pine",
       before = [[
         -- All this block will be executed before apply "set colorscheme"
         vim.opt.background = "dark"
