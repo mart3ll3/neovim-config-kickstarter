@@ -45,6 +45,8 @@ Location
 
 :mes - show history of messages
 
+:Themery - change theme (shortcut leader-th)
+
 ### Shortcuts
 ```
 escape or double escape or q - close modal windows

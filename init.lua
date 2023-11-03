@@ -362,7 +362,7 @@ vim.opt.synmaxcol = 300
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.cmd.colorscheme "catppuccin"
+-- vim.cmd.colorscheme "catppuccin"
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -424,6 +424,8 @@ vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "[B]uffer [N]ew " })
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
 vim.keymap.set("n", "<leader>ww", "<cmd>set wrap!<CR>", { desc = "Toggle [Wrap] lines" })
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Vertically" })
+
+vim.keymap.set("n", "<leader>th", "<cmd>Themery<CR>", { desc = "Change [Th]eme" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -1081,3 +1083,9 @@ require("themery").setup({
   themeConfigFile = "~/.config/nvim/lua/custom/plugins/theme.lua", -- Described below
   livePreview = true, -- Apply theme while browsing. Default to true.
 })
+
+require("custom.plugins.theme")
+
+
+
+
