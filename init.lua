@@ -1117,6 +1117,9 @@ require("themery").setup({
   themeConfigFile = "~/.config/nvim/lua/custom/plugins/theme.lua", -- Described below
   livePreview = true, -- Apply theme while browsing. Default to true.
 })
+require('rose-pine').setup({
+  dark_variant = 'moon'
+})
 
 require("custom.plugins.theme")
 
