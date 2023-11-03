@@ -84,37 +84,40 @@ require('lazy').setup({
   -- 'prichrd/netrw.nvim',
   'nvim-tree/nvim-tree.lua',
   -- 'm4xshen/autoclose.nvim',
-	'windwp/nvim-autopairs',
-	'windwp/nvim-ts-autotag',
-{
-  "folke/flash.nvim",
-  event = "VeryLazy",
-  ---@type Flash.Config
-  opts = {},
-  -- stylua: ignore
-  keys = {
-    { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-    { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  'windwp/nvim-autopairs',
+  'windwp/nvim-ts-autotag',
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s",     mode = { "n", "o", "x" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end,
+                                                                                                  desc =
+        "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc =
+      "Toggle Flash Search" },
+    },
   },
-},
-{
-  "folke/noice.nvim",
-  event = "VeryLazy",
-  opts = {
-    -- add any options here
-  },
-  dependencies = {
-    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-    "MunifTanjim/nui.nvim",
-    -- OPTIONAL:
-    --   `nvim-notify` is only needed, if you want to use the notification view.
-    --   If not available, we use `mini` as the fallback
-    "rcarriga/nvim-notify",
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
     }
-},
+  },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -152,7 +155,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim',     opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -193,7 +196,16 @@ require('lazy').setup({
   --     vim.cmd.colorscheme 'tokyonight'
   --   end,
   -- },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim",          name = "catppuccin", priority = 1000 },
+  { "rebelot/kanagawa.nvim" },
+  { "ellisonleao/gruvbox.nvim", priority = 100,      config = true,  opts = ... },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 200,
+    opts = {},
+  },
+  { "zaldih/themery.nvim" },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -208,47 +220,47 @@ require('lazy').setup({
     },
   },
 
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-  {"HiPhish/rainbow-delimiters.nvim"},
+  { "lukas-reineke/indent-blankline.nvim",    main = "ibl", opts = {} },
+  { "HiPhish/rainbow-delimiters.nvim" },
 
-  {"rrethy/vim-illuminate"},
-  {"f-person/git-blame.nvim"},
-  {"nvim-treesitter/nvim-treesitter-context"},
-  {"Wansmer/treesj"},
+  { "rrethy/vim-illuminate" },
+  { "f-person/git-blame.nvim" },
+  { "nvim-treesitter/nvim-treesitter-context" },
+  { "Wansmer/treesj" },
   -- {"simrat39/symbols-outline.nvim"},
-  {"stevearc/aerial.nvim"},
-  {"godlygeek/tabular"},
-  {"kdheepak/lazygit.nvim"},
-  {"LunarVim/bigfile.nvim"},
+  { "stevearc/aerial.nvim" },
+  { "godlygeek/tabular" },
+  { "kdheepak/lazygit.nvim" },
+  { "LunarVim/bigfile.nvim" },
   {
     "folke/trouble.nvim",
-     dependencies = { "nvim-tree/nvim-web-devicons" },
-     opts = {
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-     },
+    },
   },
 
 
   {
-      "kylechui/nvim-surround",
-      version = "*", -- Use for stability; omit to use `main` branch for the latest features
-      event = "VeryLazy",
-      config = function()
-          require("nvim-surround").setup({
-              -- Configuration here, or leave empty to use defaults
-          })
-      end
+    "kylechui/nvim-surround",
+    version = "*",   -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
   },
- {
-  'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
- },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
+  },
 
   -- "gc" to comment visual regions/lines
   -- {'numToStr/Comment.nvim', opts = {} },
-  {"preservim/nerdcommenter"},
+  { "preservim/nerdcommenter" },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -346,7 +358,7 @@ vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 vim.o.lines = 999
 vim.o.columns = 999
 vim.o.cursorline = true
-vim.opt.synmaxcol = 300 
+vim.opt.synmaxcol = 300
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -424,20 +436,20 @@ local ui = require("harpoon.ui")
 -- Outline
 vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>", { desc = "Show Outline for current buffer" })
 require("aerial").setup({
-	on_attach = function(bufnr)
-		-- Jump forwards/backwards with '{' and '}'
-		vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-		vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
-	end,
+  on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  end,
 })
 
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon Add File" })
-vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, {desc =  "Harpoon Toggle Quick menu"})
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, { desc = "Harpoon Toggle Quick menu" })
 
-vim.keymap.set("n", "<C-p>", function() ui.nav_file(1) end, { desc =  "Harpoon File #1" })
+vim.keymap.set("n", "<C-p>", function() ui.nav_file(1) end, { desc = "Harpoon File #1" })
 vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end, { desc = "Harpoon File #2" })
 vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end, { desc = "Harpoon File #3" })
-vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc =  "Harpoon File #4"} )
+vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Harpoon File #4" })
 
 -- Fugitive shortcuts
 vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git Status" })
@@ -455,38 +467,38 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.LazyGit)
 
 vim.api.nvim_set_var("NERDSpaceDelims", 1);
 -- shortcuts to toggle
-vim.api.nvim_set_keymap("n", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true, silent = true});
-vim.api.nvim_set_keymap("v", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", {noremap = true, silent = true});
+vim.api.nvim_set_keymap("n", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", { noremap = true, silent = true });
+vim.api.nvim_set_keymap("v", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", { noremap = true, silent = true });
 
 vim.keymap.set("n", "<leader>cf", "0<c-g>", { desc = "Show full file path" })
 
 -- jump list + buffer
 function jumps_fileCO(direction)
-	-- Default to jumping backward if no direction is specified
-	direction = direction or "backward"
+  -- Default to jumping backward if no direction is specified
+  direction = direction or "backward"
 
-	local current_buffer = vim.fn.bufnr()
-	local last_file = vim.fn.bufname()
+  local current_buffer = vim.fn.bufnr()
+  local last_file = vim.fn.bufname()
 
-	local jump_command = ""
-	if direction == "backward" then
-		jump_command = "normal! <c-o>"
-	elseif direction == "forward" then
-		jump_command = "normal! 1<c-i>"
-	end
+  local jump_command = ""
+  if direction == "backward" then
+    jump_command = "normal! <c-o>"
+  elseif direction == "forward" then
+    jump_command = "normal! 1<c-i>"
+  end
 
-	while true do
-		vim.cmd(vim.api.nvim_replace_termcodes(jump_command, true, true, true))
-		if vim.fn.bufnr() == current_buffer then
-			if vim.fn.bufname() == last_file then
-				break
-			else
-				last_file = vim.fn.bufname()
-			end
-		else
-			break
-		end
-	end
+  while true do
+    vim.cmd(vim.api.nvim_replace_termcodes(jump_command, true, true, true))
+    if vim.fn.bufnr() == current_buffer then
+      if vim.fn.bufname() == last_file then
+        break
+      else
+        last_file = vim.fn.bufname()
+      end
+    else
+      break
+    end
+  end
 end
 
 vim.keymap.set("n", "<c-;>", "<cmd>lua jumps_fileCO('forward')<cr>", { desc = "Next buffer in jump list" })
@@ -545,7 +557,8 @@ vim.keymap.set('n', '<leader>sR', require('telescope.builtin').resume, { desc = 
 vim.keymap.set('n', '<leader>sR', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set("n", "<leader>sj", require("telescope.builtin").jumplist, { desc = "[J]ump [L]ist" })
 vim.keymap.set('n', '<leader>sr', '<cmd>lua require("spectre").toggle()<CR>', { desc = "Toggle Spectre" })
-vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', { desc = "Search current word Spectre" })
+vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
+  { desc = "Search current word Spectre" })
 vim.keymap.set('n', '<leader>J', require('treesj').toggle)
 
 -- [[ Configure Treesitter ]]
@@ -631,13 +644,13 @@ require('nvim-treesitter.configs').setup {
       enable = true,
       swap_next = {
         ["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
-        ["<leader>n:"] = "@property.outer", -- swap object property with next
-        ["<leader>nm"] = "@function.outer", -- swap function with next
+        ["<leader>n:"] = "@property.outer",  -- swap object property with next
+        ["<leader>nm"] = "@function.outer",  -- swap function with next
       },
       swap_previous = {
         ["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
-        ["<leader>p:"] = "@property.outer", -- swap object property with prev
-        ["<leader>pm"] = "@function.outer", -- swap function with previous
+        ["<leader>p:"] = "@property.outer",  -- swap object property with prev
+        ["<leader>pm"] = "@function.outer",  -- swap function with previous
       },
     },
     move = {
@@ -835,25 +848,25 @@ cmp.setup {
 }
 -- indent blank line
 local highlight = {
-    "RainbowRed",
-    "RainbowYellow",
-    "RainbowBlue",
-    "RainbowOrange",
-    "RainbowGreen",
-    "RainbowViolet",
-    "RainbowCyan",
+  "RainbowRed",
+  "RainbowYellow",
+  "RainbowBlue",
+  "RainbowOrange",
+  "RainbowGreen",
+  "RainbowViolet",
+  "RainbowCyan",
 }
 local hooks = require "ibl.hooks"
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-    vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-    vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-    vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-    vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-    vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-    vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+  vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+  vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+  vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+  vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+  vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+  vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+  vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 end)
 
 vim.g.rainbow_delimiters = { highlight = highlight }
@@ -872,11 +885,11 @@ require("noice").setup({
   },
   -- you can enable a preset for easier configuration
   presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
+    bottom_search = true,         -- use a classic bottom cmdline for search
+    command_palette = true,       -- position the cmdline and popupmenu together
     long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
+    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false,       -- add a border to hover docs and signature help
   },
 })
 
@@ -884,8 +897,8 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -900,18 +913,18 @@ require('lualine').setup {
     }
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { 'filename' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },
@@ -942,35 +955,35 @@ require("nvim-tree").setup({
   },
 })
 
-  local bufferline = require('bufferline')
-  bufferline.setup {
-      options = {
+local bufferline = require('bufferline')
+bufferline.setup {
+  options = {
 
-            offsets = {
-                {
-                    filetype = "NvimTree",
-                    text = "File Explorer"  ,
-                    text_align =  "center",
-                    separator = true
-                }
-            }
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "File Explorer",
+        text_align = "center",
+        separator = true
       }
+    }
   }
+}
 
 
 -- require("autoclose").setup()
-require('treesj').setup({--[[ your config ]]})
+require('treesj').setup({ --[[ your config ]] })
 
 local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
-    -- vim way: ; goes to the direction you were moving.
-    vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-    vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+-- vim way: ; goes to the direction you were moving.
+vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
 
 -- require("symbols-outline").setup()
 require("aerial").setup()
 require("nvim-autopairs").setup({
-    disable_filetype = { 'TelescopePrompt', 'vim' }
+  disable_filetype = { 'TelescopePrompt', 'vim' }
 })
 
 require("nvim-ts-autotag").setup()
@@ -1000,3 +1013,71 @@ require("bigfile").setup {
     -- "filetype",
   },
 }
+
+-- Using before and after.
+require("themery").setup({
+  themes = {
+    {
+      name = "Gruvbox dark",
+      colorscheme = "gruvbox",
+      before = [[
+        -- All this block will be executed before apply "set colorscheme"
+        vim.opt.background = "dark"
+      ]],
+    },
+    {
+      name = "Gruvbox light",
+      colorscheme = "gruvbox",
+      before = [[
+      vim.opt.background = "light"
+    ]],
+      after = [[-- Same as before, but after if you need it]]
+    },
+  {
+      name = "Kanagawa Lotus",
+      colorscheme = "kanagawa-lotus",
+    },
+  {
+    name = "Kanagawa Dragon",
+    colorscheme = "kanagawa-dragon",
+  },
+  {
+    name = "Kanagawa Wave",
+    colorscheme = "kanagawa-wave",
+  },
+    {
+      name = "Tokyo Night",
+      colorscheme = "tokyonight-night",
+    },
+    {
+      name = "Tokyo Storm",
+      colorscheme = "tokyonight-storm",
+    },
+    {
+      name = "Tokyo Day",
+      colorscheme = "tokyonight-day",
+    },
+    {
+      name = "Tokyo Moon",
+      colorscheme = "tokyonight-moon",
+    },
+    {
+      name = "Catppuccin Latte",
+      colorscheme = "catppuccin-latte",
+    },
+    {
+      name = "Catppuccin Frappe",
+      colorscheme = "catppuccin-frappe",
+    },
+    {
+      name = "Catppuccin Macchiato",
+      colorscheme = "catppuccin-macchiato",
+    },
+    {
+      name = "Catppuccin Mocha",
+      colorscheme = "catppuccin-mocha",
+    },
+  },
+  themeConfigFile = "~/.config/nvim/lua/custom/plugins/theme.lua", -- Described below
+  livePreview = true, -- Apply theme while browsing. Default to true.
+})
