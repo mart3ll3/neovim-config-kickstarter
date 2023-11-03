@@ -205,6 +205,7 @@ require('lazy').setup({
     priority = 200,
     opts = {},
   },
+  {"nyoom-engineering/oxocarbon.nvim"},
   { "zaldih/themery.nvim" },
   {
     -- Set lualine as statusline
@@ -1020,14 +1021,6 @@ require("bigfile").setup {
 require("themery").setup({
   themes = {
     {
-      name = "Gruvbox dark",
-      colorscheme = "gruvbox",
-      before = [[
-        -- All this block will be executed before apply "set colorscheme"
-        vim.opt.background = "dark"
-      ]],
-    },
-    {
       name = "Gruvbox light",
       colorscheme = "gruvbox",
       before = [[
@@ -1038,6 +1031,30 @@ require("themery").setup({
   {
       name = "Kanagawa Lotus",
       colorscheme = "kanagawa-lotus",
+    },
+    {
+      name = "Tokyo Day",
+      colorscheme = "tokyonight-day",
+    },
+    {
+      name = "Catppuccin Latte",
+      colorscheme = "catppuccin-latte",
+    },
+    {
+      name = "Oxocarbon Light",
+      colorscheme = "oxocarbon",
+      before = [[
+        -- All this block will be executed before apply "set colorscheme"
+        vim.opt.background = "light"
+      ]],
+    },
+    {
+      name = "Gruvbox dark",
+      colorscheme = "gruvbox",
+      before = [[
+        -- All this block will be executed before apply "set colorscheme"
+        vim.opt.background = "dark"
+      ]],
     },
   {
     name = "Kanagawa Dragon",
@@ -1056,16 +1073,8 @@ require("themery").setup({
       colorscheme = "tokyonight-storm",
     },
     {
-      name = "Tokyo Day",
-      colorscheme = "tokyonight-day",
-    },
-    {
       name = "Tokyo Moon",
       colorscheme = "tokyonight-moon",
-    },
-    {
-      name = "Catppuccin Latte",
-      colorscheme = "catppuccin-latte",
     },
     {
       name = "Catppuccin Frappe",
@@ -1078,6 +1087,14 @@ require("themery").setup({
     {
       name = "Catppuccin Mocha",
       colorscheme = "catppuccin-mocha",
+    },
+    {
+      name = "Oxocarbon Dark",
+      colorscheme = "oxocarbon",
+      before = [[
+        -- All this block will be executed before apply "set colorscheme"
+        vim.opt.background = "dark"
+      ]],
     },
   },
   themeConfigFile = "~/.config/nvim/lua/custom/plugins/theme.lua", -- Described below
