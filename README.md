@@ -1,7 +1,7 @@
 # kickstart.nvim
 
 ### Prerequisities
-Neovim
+Neovim 0.9
 
 [git](https://cli.github.com/)
 
