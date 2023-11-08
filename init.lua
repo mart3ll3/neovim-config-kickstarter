@@ -74,7 +74,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  {'tpope/vim-sleuth', lazy = true},
+  -- {'tpope/vim-sleuth', lazy = true},
   {'mbbill/undotree'},
   {'RishabhRD/popfix', lazy = true},
   {'RishabhRD/nvim-cheat.sh', lazy = true},
@@ -326,13 +326,41 @@ require('lazy').setup({
 
 -- Set highlight on search
 vim.o.hlsearch = true
+vim.opt.incsearch = true
 vim.wo.relativenumber = true
 
 -- Make line numbers default
 vim.wo.number = true
 
+-- Joshua Morony settings
+vim.opt.nu = true
+
+vim.opt.tabstop=2
+vim.opt.shiftwidth=2
+vim.opt.softtabstop=2
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.showmatch = true
+vim.opt.synmaxcol = 300
+vim.opt.laststatus = 2 -- always show statusline
+
+-- Sidebar
+vim.opt.numberwidth = 3
+vim.opt.showcmd = true
+vim.opt.cmdheight=0
+
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+
+vim.opt.updatetime = 50
+
+vim.opt.colorcolumn = "120"
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
+
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -365,7 +393,6 @@ vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 vim.o.lines = 999
 vim.o.columns = 999
 vim.o.cursorline = true
-vim.opt.synmaxcol = 300
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
