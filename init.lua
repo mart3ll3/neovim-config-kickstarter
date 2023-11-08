@@ -75,7 +75,7 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   {'tpope/vim-sleuth', lazy = true},
-  {'mbbill/undotree', lazy = true},
+  {'mbbill/undotree'},
   {'RishabhRD/popfix', lazy = true},
   {'RishabhRD/nvim-cheat.sh', lazy = true},
   {'nvim-lua/plenary.nvim', lazy = true},
