@@ -70,7 +70,7 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  -- 'tpope/vim-fugitive',
+  'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
@@ -234,7 +234,7 @@ require('lazy').setup({
   -- {"simrat39/symbols-outline.nvim"},
   { "stevearc/aerial.nvim" , lazy = true},
   { "godlygeek/tabular", lazy = true },
-  { "kdheepak/lazygit.nvim" , lazy = true},
+  { "kdheepak/lazygit.nvim" },
   { "LunarVim/bigfile.nvim" , lazy = true},
   {
     "folke/trouble.nvim",
@@ -266,7 +266,7 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   -- {'numToStr/Comment.nvim', opts = {} },
-  { "preservim/nerdcommenter" , lazy = true},
+  { "preservim/nerdcommenter"},
 
   -- Fuzzy Finder (files, lsp, etc)
   {
