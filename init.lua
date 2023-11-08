@@ -70,22 +70,22 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  'tpope/vim-fugitive',
+  -- 'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
-  'mbbill/undotree',
-  'RishabhRD/popfix',
-  'RishabhRD/nvim-cheat.sh',
-  'nvim-lua/plenary.nvim',
-  'nvim-pack/nvim-spectre',
-  'ThePrimeagen/harpoon',
+  {'tpope/vim-sleuth', lazy = true},
+  {'mbbill/undotree', lazy = true},
+  {'RishabhRD/popfix', lazy = true},
+  {'RishabhRD/nvim-cheat.sh', lazy = true},
+  {'nvim-lua/plenary.nvim', lazy = true},
+  {'nvim-pack/nvim-spectre', lazy = true},
+  {'ThePrimeagen/harpoon', lazy = true},
   -- 'prichrd/netrw.nvim',
-  'nvim-tree/nvim-tree.lua',
+  {'nvim-tree/nvim-tree.lua', lazy = true},
   -- 'm4xshen/autoclose.nvim',
-  'windwp/nvim-autopairs',
-  'windwp/nvim-ts-autotag',
+  {'windwp/nvim-autopairs', lazy = true},
+  {'windwp/nvim-ts-autotag', lazy = true},
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -159,6 +159,7 @@ require('lazy').setup({
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    lazy = true,
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
@@ -207,10 +208,11 @@ require('lazy').setup({
   },
   {"nyoom-engineering/oxocarbon.nvim"},
   { 'rose-pine/neovim', name = 'rose-pine' },
-  { "zaldih/themery.nvim" },
+  { "zaldih/themery.nvim", lazy = true },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    lazy = true,
     -- See `:help lualine.txt`
     opts = {
       options = {
@@ -222,20 +224,21 @@ require('lazy').setup({
     },
   },
 
-  { "lukas-reineke/indent-blankline.nvim",    main = "ibl", opts = {} },
-  { "HiPhish/rainbow-delimiters.nvim" },
+  { "lukas-reineke/indent-blankline.nvim",    main = "ibl", lazy = true, opts = {} },
+  { "HiPhish/rainbow-delimiters.nvim" , lazy = true},
 
-  { "rrethy/vim-illuminate" },
-  { "f-person/git-blame.nvim" },
-  { "nvim-treesitter/nvim-treesitter-context" },
-  { "Wansmer/treesj" },
+  { "rrethy/vim-illuminate" , lazy = true},
+  { "f-person/git-blame.nvim" , lazy = true},
+  { "nvim-treesitter/nvim-treesitter-context", lazy = true },
+  { "Wansmer/treesj" , lazy = true},
   -- {"simrat39/symbols-outline.nvim"},
-  { "stevearc/aerial.nvim" },
-  { "godlygeek/tabular" },
-  { "kdheepak/lazygit.nvim" },
-  { "LunarVim/bigfile.nvim" },
+  { "stevearc/aerial.nvim" , lazy = true},
+  { "godlygeek/tabular", lazy = true },
+  { "kdheepak/lazygit.nvim" , lazy = true},
+  { "LunarVim/bigfile.nvim" , lazy = true},
   {
     "folke/trouble.nvim",
+    lazy = true,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       -- your configuration comes here
@@ -257,12 +260,13 @@ require('lazy').setup({
   },
   {
     'nvim-lualine/lualine.nvim',
+    lazy = true,
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
   },
 
   -- "gc" to comment visual regions/lines
   -- {'numToStr/Comment.nvim', opts = {} },
-  { "preservim/nerdcommenter" },
+  { "preservim/nerdcommenter" , lazy = true},
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -296,6 +300,7 @@ require('lazy').setup({
 
   {
     'akinsho/bufferline.nvim',
+    lazy = true,
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons'
   },
