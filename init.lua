@@ -231,7 +231,7 @@ require('lazy').setup({
 
   { "rrethy/vim-illuminate"},
   { "f-person/git-blame.nvim"},
-  { "nvim-treesitter/nvim-treesitter-context", lazy = true },
+  { "nvim-treesitter/nvim-treesitter-context" },
   { "Wansmer/treesj" , lazy = true},
   -- {"simrat39/symbols-outline.nvim"},
   { "stevearc/aerial.nvim" , lazy = true},
