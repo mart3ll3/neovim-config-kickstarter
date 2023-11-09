@@ -227,10 +227,10 @@ require('lazy').setup({
   },
 
   { "lukas-reineke/indent-blankline.nvim",    main = "ibl", lazy = true, opts = {} },
-  { "HiPhish/rainbow-delimiters.nvim" , lazy = true},
+  { "HiPhish/rainbow-delimiters.nvim"},
 
-  { "rrethy/vim-illuminate" , lazy = true},
-  { "f-person/git-blame.nvim" , lazy = true},
+  { "rrethy/vim-illuminate"},
+  { "f-person/git-blame.nvim"},
   { "nvim-treesitter/nvim-treesitter-context", lazy = true },
   { "Wansmer/treesj" , lazy = true},
   -- {"simrat39/symbols-outline.nvim"},
