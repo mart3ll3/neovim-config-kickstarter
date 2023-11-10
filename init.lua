@@ -248,6 +248,8 @@ require('lazy').setup({
       -- refer to the configuration section below
     },
   },
+      {"sindrets/diffview.nvim" },
+
 
 
   {
@@ -491,7 +493,8 @@ vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Harpoon Fi
 
 -- Fugitive shortcuts
 vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git Status" })
-vim.keymap.set("n", "<leader>gd", "<cmd>Gdiff<CR>", { desc = "Git Diff" })
+vim.keymap.set("n", "<leader>gf", "<cmd>Gdiff<CR>", { desc = "Git Diff" })
+vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Git Diffview plugin" })
 vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<CR>", { desc = "Git Blame" })
 vim.keymap.set("n", "<leader>gP", "<cmd>Git push<CR>", { desc = "Git Push" })
 vim.keymap.set("n", "<leader>gp", "<cmd>Git pull<CR>", { desc = "Git Pull" })
