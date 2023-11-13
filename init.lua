@@ -456,7 +456,7 @@ vim.keymap.set("n", "<leader>hh", "<cmd>nohlsearch<CR>", { desc = "Clear highlig
 -- Close buffers
 vim.keymap.set("n", "<leader>bd", "<cmd>bdelete!<CR>", { desc = "[B]uffer Force [D]elete" })
 vim.keymap.set("n", "<leader>ba", "<cmd>bufdo bwipeout<cr>", { desc = "[B]uffers Close [A]ll" })
--- vim.keymap.set("n", "<leader>bb", "<cmd>%bd|e#<CR>", { desc = "[B]uffers Close All [B]ut This" })
+vim.keymap.set("n", "<leader>bu", "<cmd>%bd|e#<CR>", { desc = "[B]uffers Close All B[u]t This" })
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "[B]uffer [N]ew " })
 
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
