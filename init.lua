@@ -118,6 +118,9 @@ require('lazy').setup({
       "rcarriga/nvim-notify",
     }
   },
+    {'mfussenegger/nvim-dap'},
+    { 'rcarriga/nvim-dap-ui'},
+    {'leoluz/nvim-dap-go'},
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -271,6 +274,7 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   -- {'numToStr/Comment.nvim', opts = {} },
   { "preservim/nerdcommenter"},
+{ 'echasnovski/mini.animate', version = '*' },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -339,9 +343,9 @@ vim.wo.number = true
 -- Joshua Morony settings
 vim.opt.nu = true
 
-vim.opt.tabstop=2
-vim.opt.shiftwidth=2
-vim.opt.softtabstop=2
+vim.opt.tabstop=4
+vim.opt.shiftwidth=4
+vim.opt.softtabstop=4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.swapfile = false
@@ -393,7 +397,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
-vim.o.guifont = "JetBrainsMono Nerd Font:h12"
+vim.o.guifont = "JetBrainsMono Nerd Font:h11"
 vim.o.lines = 999
 vim.o.columns = 999
 vim.o.cursorline = true
@@ -413,8 +417,11 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-d>", "<Cmd>lua vim.cmd('normal! <C-d>'); MiniAnimate.execute_after('scroll', 'normal! zz')<CR>")
+
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-u>", "<Cmd>lua vim.cmd('normal! <C-u>'); MiniAnimate.execute_after('scroll', 'normal! zz')<CR>")
 
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
@@ -495,6 +502,7 @@ vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Harpoon Fi
 vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git Status" })
 vim.keymap.set("n", "<leader>gf", "<cmd>Gdiff<CR>", { desc = "Git Diff" })
 vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Git Diffview plugin" })
+vim.keymap.set("n", "<leader>gc", "<cmd>DiffviewClose<CR>", { desc = "Git Diffview Close" })
 vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<CR>", { desc = "Git Blame" })
 vim.keymap.set("n", "<leader>gP", "<cmd>Git push<CR>", { desc = "Git Push" })
 vim.keymap.set("n", "<leader>gp", "<cmd>Git pull<CR>", { desc = "Git Pull" })
@@ -889,33 +897,78 @@ cmp.setup {
     { name = 'buffer', keyword_length = 3},
   },
 }
--- indent blank line
-local highlight = {
-  "RainbowRed",
-  "RainbowYellow",
-  "RainbowBlue",
-  "RainbowOrange",
-  "RainbowGreen",
-  "RainbowViolet",
-  "RainbowCyan",
-}
-local hooks = require "ibl.hooks"
--- create the highlight groups in the highlight setup hook, so they are reset
--- every time the colorscheme changes
-hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-  vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-  vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-  vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-  vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-  vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-  vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-  vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-end)
+-- -- indent blank line
+-- local highlight = {
+  -- "RainbowRed",
+  -- "RainbowYellow",
+  -- "RainbowBlue",
+  -- "RainbowOrange",
+  -- "RainbowGreen",
+  -- "RainbowViolet",
+  -- "RainbowCyan",
+-- }
+-- local hooks = require "ibl.hooks"
+-- -- create the highlight groups in the highlight setup hook, so they are reset
+-- -- every time the colorscheme changes
+-- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+  -- vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+  -- vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+  -- vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+  -- vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+  -- vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+  -- vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+  -- vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+-- end)
 
-vim.g.rainbow_delimiters = { highlight = highlight }
-require("ibl").setup { scope = { highlight = highlight } }
+-- vim.g.rainbow_delimiters = { highlight = highlight }
+-- require("ibl").setup { scope = { highlight = highlight } }
 
-hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+-- hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+--
+-- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#35353a gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#35353a gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#35353a gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#35353a gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#35353a gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#35353a gui=nocombine]]
+
+-- require("ibl").setup {
+  -- char = "▏",
+  -- buftype_exclude = {"terminal"},
+  -- show_trailing_blankline_indent = false,
+  -- show_current_context = true,
+  -- filetype_exclude = {"help", "terminal"},
+  -- -- default : {'class', 'function', 'method'}
+  -- space_char_blankline = " ",
+  -- char_highlight_list = {
+    -- "IndentBlanklineIndent1",
+    -- "IndentBlanklineIndent2",
+    -- "IndentBlanklineIndent3",
+    -- "IndentBlanklineIndent4",
+    -- "IndentBlanklineIndent5",
+    -- "IndentBlanklineIndent6",
+  -- },
+  -- context_patterns = {
+    -- "class",
+    -- "function",
+    -- "method",
+    -- "^if",
+    -- "^while",
+    -- "^for",
+    -- "^object",
+    -- "^table",
+    -- "^type",
+    -- "^import",
+    -- "block",
+    -- "arguments"
+  -- }
+  -- -- disabled now for performance hit.
+  -- -- use_treesitter = true
+-- }
+
+require("ibl").setup({
+    scope = { enabled = false },
+})
 
 require("noice").setup({
   lsp = {
@@ -1160,7 +1213,19 @@ require('rose-pine').setup({
   dark_variant = 'moon'
 })
 
+local animate = require('mini.animate')
+animate.setup({
+    scroll = {
+      -- Animate for 200 milliseconds with linear easing
+      timing = animate.gen_timing.linear({ duration = 20, unit = 'total' }),
+
+      -- Animate equally but with at most 120 steps instead of default 60
+      subscroll = animate.gen_subscroll.equal({ max_output_steps = 120 }),
+    }
+  })
+
 require("custom.plugins.theme")
+-- require("custom.plugins.debug")
 
 
 
