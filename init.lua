@@ -274,7 +274,7 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   -- {'numToStr/Comment.nvim', opts = {} },
   { "preservim/nerdcommenter"},
-{ 'echasnovski/mini.animate', version = '*' },
+-- { 'echasnovski/mini.animate', version = '*' },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -343,9 +343,9 @@ vim.wo.number = true
 -- Joshua Morony settings
 vim.opt.nu = true
 
-vim.opt.tabstop=4
-vim.opt.shiftwidth=4
-vim.opt.softtabstop=4
+vim.opt.tabstop=2
+vim.opt.shiftwidth=2
+vim.opt.softtabstop=2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.swapfile = false
@@ -397,7 +397,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
-vim.o.guifont = "JetBrainsMono Nerd Font:h11"
+vim.o.guifont = "JetBrainsMono Nerd Font:h9"
 vim.o.lines = 999
 vim.o.columns = 999
 vim.o.cursorline = true
@@ -417,11 +417,11 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
--- vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-d>", "<Cmd>lua vim.cmd('normal! <C-d>'); MiniAnimate.execute_after('scroll', 'normal! zz')<CR>")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+-- vim.keymap.set("n", "<C-d>", "<Cmd>lua vim.cmd('normal! <C-d>'); MiniAnimate.execute_after('scroll', 'normal! zz')<CR>")
 
--- vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<C-u>", "<Cmd>lua vim.cmd('normal! <C-u>'); MiniAnimate.execute_after('scroll', 'normal! zz')<CR>")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- vim.keymap.set("n", "<C-u>", "<Cmd>lua vim.cmd('normal! <C-u>'); MiniAnimate.execute_after('scroll', 'normal! zz')<CR>")
 
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
@@ -853,6 +853,8 @@ mason_lspconfig.setup_handlers {
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
+require('luasnip').filetype_extend("javascript", { "javascriptreact" })
+require('luasnip').filetype_extend("javascript", { "html" })
 luasnip.config.setup {}
 
 cmp.setup {
@@ -1213,16 +1215,16 @@ require('rose-pine').setup({
   dark_variant = 'moon'
 })
 
-local animate = require('mini.animate')
-animate.setup({
-    scroll = {
-      -- Animate for 200 milliseconds with linear easing
-      timing = animate.gen_timing.linear({ duration = 20, unit = 'total' }),
+-- local animate = require('mini.animate')
+-- animate.setup({
+    -- scroll = {
+      -- -- Animate for 200 milliseconds with linear easing
+      -- timing = animate.gen_timing.linear({ duration = 20, unit = 'total' }),
 
-      -- Animate equally but with at most 120 steps instead of default 60
-      subscroll = animate.gen_subscroll.equal({ max_output_steps = 120 }),
-    }
-  })
+      -- -- Animate equally but with at most 120 steps instead of default 60
+      -- subscroll = animate.gen_subscroll.equal({ max_output_steps = 120 }),
+    -- }
+  -- })
 
 require("custom.plugins.theme")
 -- require("custom.plugins.debug")
