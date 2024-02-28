@@ -634,6 +634,7 @@ require('nvim-treesitter.configs').setup {
     'gitignore',
     'xml',
     'c_sharp',
+    'java',
   },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
