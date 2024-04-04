@@ -70,22 +70,55 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  {
+    'tpope/vim-fugitive',
+    event = "VeryLazy",
+  },
+  {
+    'tpope/vim-rhubarb',
+    event = "VeryLazy",
+  },
 
   -- Detect tabstop and shiftwidth automatically
   -- {'tpope/vim-sleuth', lazy = true},
-  {'mbbill/undotree'},
-  {'RishabhRD/popfix', lazy = true},
-  {'RishabhRD/nvim-cheat.sh', lazy = true},
-  {'nvim-lua/plenary.nvim', lazy = true},
-  {'nvim-pack/nvim-spectre', lazy = true},
-  {'ThePrimeagen/harpoon', lazy = true},
+  {
+    'mbbill/undotree',
+    event = "VeryLazy",
+  },
+  {
+    'RishabhRD/popfix',
+    event = "VeryLazy",
+  },
+  {
+    'RishabhRD/nvim-cheat.sh',
+    event = "VeryLazy",
+  },
+  {
+    'nvim-lua/plenary.nvim',
+    event = "VeryLazy",
+  },
+  {
+    'nvim-pack/nvim-spectre',
+    event = "VeryLazy",
+  },
+  {
+    'ThePrimeagen/harpoon',
+    event = "VeryLazy",
+  },
   -- 'prichrd/netrw.nvim',
-  {'nvim-tree/nvim-tree.lua', lazy = true},
+  {
+    'nvim-tree/nvim-tree.lua',
+    event = "VeryLazy",
+  },
   -- 'm4xshen/autoclose.nvim',
-  {'windwp/nvim-autopairs', lazy = true},
-  {'windwp/nvim-ts-autotag', lazy = true},
+  {
+    'windwp/nvim-autopairs',
+    event = "VeryLazy",
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    event = "VeryLazy",
+  },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -93,14 +126,23 @@ require('lazy').setup({
     opts = {},
     -- stylua: ignore
     keys = {
-      { "s",     mode = { "n", "o", "x" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end,
-                                                                                                  desc =
-        "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc =
-      "Toggle Flash Search" },
+      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end,       desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o",               function() require("flash").remote() end,     desc = "Remote Flash" },
+      {
+        "R",
+        mode = { "o", "x" },
+        function() require("flash").treesitter_search() end,
+        desc =
+        "Treesitter Search"
+      },
+      {
+        "<c-s>",
+        mode = { "c" },
+        function() require("flash").toggle() end,
+        desc =
+        "Toggle Flash Search"
+      },
     },
   },
   {
@@ -118,9 +160,18 @@ require('lazy').setup({
       "rcarriga/nvim-notify",
     }
   },
-    {'mfussenegger/nvim-dap'},
-    { 'rcarriga/nvim-dap-ui'},
-    {'leoluz/nvim-dap-go'},
+  {
+    'mfussenegger/nvim-dap',
+    event = "VeryLazy",
+  },
+  {
+    'rcarriga/nvim-dap-ui',
+    event = "VeryLazy",
+  },
+  {
+    'leoluz/nvim-dap-go',
+    event = "VeryLazy",
+  },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -151,8 +202,8 @@ require('lazy').setup({
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
-      "hrsh7th/cmp-buffer" ,
-     "hrsh7th/cmp-path" ,
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
@@ -160,11 +211,15 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',     opts = {} },
+  {
+    'folke/which-key.nvim',
+    event = "VeryLazy",
+    opts = {}
+  },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
-    lazy = true,
+    event = "VeryLazy",
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
@@ -202,22 +257,46 @@ require('lazy').setup({
   --     vim.cmd.colorscheme 'tokyonight'
   --   end,
   -- },
-  { "catppuccin/nvim",          name = "catppuccin", priority = 1000 },
-  { "rebelot/kanagawa.nvim" },
-  { "ellisonleao/gruvbox.nvim", priority = 100,      config = true,  opts = ... },
+  {
+    "catppuccin/nvim",
+    event = "VeryLazy",
+    name = "catppuccin",
+    priority = 1000
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "ellisonleao/gruvbox.nvim",
+    event = "VeryLazy",
+    priority = 100,
+    config = true,
+    opts = ...
+  },
   {
     "folke/tokyonight.nvim",
-    lazy = false,
+    event = "VeryLazy",
     priority = 200,
     opts = {},
   },
-  {"nyoom-engineering/oxocarbon.nvim"},
-  { 'rose-pine/neovim', name = 'rose-pine' },
-  { "zaldih/themery.nvim", lazy = true },
+  {
+    "nyoom-engineering/oxocarbon.nvim",
+    event = "VeryLazy",
+  },
+  {
+    'rose-pine/neovim',
+    event = "VeryLazy",
+    name = 'rose-pine'
+  },
+  {
+    "zaldih/themery.nvim",
+    event = "VeryLazy",
+  },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    lazy = true,
+    event = "VeryLazy",
     -- See `:help lualine.txt`
     opts = {
       options = {
@@ -229,21 +308,54 @@ require('lazy').setup({
     },
   },
 
-  { "lukas-reineke/indent-blankline.nvim",    main = "ibl", lazy = true, opts = {} },
-  { "HiPhish/rainbow-delimiters.nvim"},
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "VeryLazy",
+    main = "ibl",
+    lazy = true,
+    opts = {}
+  },
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    event = "VeryLazy",
+  },
 
-  { "rrethy/vim-illuminate"},
-  { "f-person/git-blame.nvim"},
-  { "nvim-treesitter/nvim-treesitter-context" },
-  { "Wansmer/treesj" , lazy = true},
+  {
+    "rrethy/vim-illuminate",
+    event = "VeryLazy",
+  },
+  {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "VeryLazy",
+  },
+  {
+    "Wansmer/treesj",
+    event = "VeryLazy",
+  },
   -- {"simrat39/symbols-outline.nvim"},
-  { "stevearc/aerial.nvim" , lazy = true},
-  { "godlygeek/tabular", lazy = true },
-  { "kdheepak/lazygit.nvim" },
-  { "LunarVim/bigfile.nvim" , lazy = true},
+  {
+    "stevearc/aerial.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "godlygeek/tabular",
+    event = "VeryLazy",
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "LunarVim/bigfile.nvim",
+    event = "VeryLazy",
+  },
   {
     "folke/trouble.nvim",
-    lazy = true,
+    event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       -- your configuration comes here
@@ -251,13 +363,16 @@ require('lazy').setup({
       -- refer to the configuration section below
     },
   },
-      {"sindrets/diffview.nvim" },
+  {
+    "sindrets/diffview.nvim",
+    event = "VeryLazy",
+  },
 
 
 
   {
     "kylechui/nvim-surround",
-    version = "*",   -- Use for stability; omit to use `main` branch for the latest features
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
       require("nvim-surround").setup({
@@ -267,18 +382,22 @@ require('lazy').setup({
   },
   {
     'nvim-lualine/lualine.nvim',
-    lazy = true,
+    event = "VeryLazy",
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
   },
 
   -- "gc" to comment visual regions/lines
   -- {'numToStr/Comment.nvim', opts = {} },
-  { "preservim/nerdcommenter"},
--- { 'echasnovski/mini.animate', version = '*' },
+  {
+    "preservim/nerdcommenter",
+    event = "VeryLazy",
+  },
+  -- { 'echasnovski/mini.animate', version = '*' },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
+    event = "VeryLazy",
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -300,6 +419,7 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    event = "VeryLazy",
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -308,7 +428,7 @@ require('lazy').setup({
 
   {
     'akinsho/bufferline.nvim',
-    lazy = true,
+    event = "VeryLazy",
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons'
   },
@@ -343,9 +463,9 @@ vim.wo.number = true
 -- Joshua Morony settings
 vim.opt.nu = true
 
-vim.opt.tabstop=2
-vim.opt.shiftwidth=2
-vim.opt.softtabstop=2
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.swapfile = false
@@ -357,7 +477,7 @@ vim.opt.laststatus = 2 -- always show statusline
 -- Sidebar
 vim.opt.numberwidth = 3
 vim.opt.showcmd = true
-vim.opt.cmdheight=0
+vim.opt.cmdheight = 0
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
@@ -896,31 +1016,31 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'path'},
-    { name = 'buffer', keyword_length = 3},
+    { name = 'path' },
+    { name = 'buffer',  keyword_length = 3 },
   },
 }
 -- -- indent blank line
 -- local highlight = {
-  -- "RainbowRed",
-  -- "RainbowYellow",
-  -- "RainbowBlue",
-  -- "RainbowOrange",
-  -- "RainbowGreen",
-  -- "RainbowViolet",
-  -- "RainbowCyan",
+-- "RainbowRed",
+-- "RainbowYellow",
+-- "RainbowBlue",
+-- "RainbowOrange",
+-- "RainbowGreen",
+-- "RainbowViolet",
+-- "RainbowCyan",
 -- }
 -- local hooks = require "ibl.hooks"
 -- -- create the highlight groups in the highlight setup hook, so they are reset
 -- -- every time the colorscheme changes
 -- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-  -- vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-  -- vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-  -- vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-  -- vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-  -- vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-  -- vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-  -- vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+-- vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+-- vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+-- vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+-- vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+-- vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+-- vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+-- vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 -- end)
 
 -- vim.g.rainbow_delimiters = { highlight = highlight }
@@ -936,41 +1056,41 @@ cmp.setup {
 -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#35353a gui=nocombine]]
 
 -- require("ibl").setup {
-  -- char = "▏",
-  -- buftype_exclude = {"terminal"},
-  -- show_trailing_blankline_indent = false,
-  -- show_current_context = true,
-  -- filetype_exclude = {"help", "terminal"},
-  -- -- default : {'class', 'function', 'method'}
-  -- space_char_blankline = " ",
-  -- char_highlight_list = {
-    -- "IndentBlanklineIndent1",
-    -- "IndentBlanklineIndent2",
-    -- "IndentBlanklineIndent3",
-    -- "IndentBlanklineIndent4",
-    -- "IndentBlanklineIndent5",
-    -- "IndentBlanklineIndent6",
-  -- },
-  -- context_patterns = {
-    -- "class",
-    -- "function",
-    -- "method",
-    -- "^if",
-    -- "^while",
-    -- "^for",
-    -- "^object",
-    -- "^table",
-    -- "^type",
-    -- "^import",
-    -- "block",
-    -- "arguments"
-  -- }
-  -- -- disabled now for performance hit.
-  -- -- use_treesitter = true
+-- char = "▏",
+-- buftype_exclude = {"terminal"},
+-- show_trailing_blankline_indent = false,
+-- show_current_context = true,
+-- filetype_exclude = {"help", "terminal"},
+-- -- default : {'class', 'function', 'method'}
+-- space_char_blankline = " ",
+-- char_highlight_list = {
+-- "IndentBlanklineIndent1",
+-- "IndentBlanklineIndent2",
+-- "IndentBlanklineIndent3",
+-- "IndentBlanklineIndent4",
+-- "IndentBlanklineIndent5",
+-- "IndentBlanklineIndent6",
+-- },
+-- context_patterns = {
+-- "class",
+-- "function",
+-- "method",
+-- "^if",
+-- "^while",
+-- "^for",
+-- "^object",
+-- "^table",
+-- "^type",
+-- "^import",
+-- "block",
+-- "arguments"
+-- }
+-- -- disabled now for performance hit.
+-- -- use_treesitter = true
 -- }
 
 require("ibl").setup({
-    scope = { enabled = false },
+  scope = { enabled = false },
 })
 
 require("noice").setup({
@@ -1124,7 +1244,7 @@ require("themery").setup({
     ]],
       after = [[-- Same as before, but after if you need it]]
     },
-  {
+    {
       name = "Kanagawa Lotus",
       colorscheme = "kanagawa-lotus",
     },
@@ -1160,14 +1280,14 @@ require("themery").setup({
         vim.opt.background = "dark"
       ]],
     },
-  {
-    name = "Kanagawa Dragon",
-    colorscheme = "kanagawa-dragon",
-  },
-  {
-    name = "Kanagawa Wave",
-    colorscheme = "kanagawa-wave",
-  },
+    {
+      name = "Kanagawa Dragon",
+      colorscheme = "kanagawa-dragon",
+    },
+    {
+      name = "Kanagawa Wave",
+      colorscheme = "kanagawa-wave",
+    },
     {
       name = "Tokyo Night",
       colorscheme = "tokyonight-night",
@@ -1210,7 +1330,7 @@ require("themery").setup({
     },
   },
   themeConfigFile = "~/.config/nvim/lua/custom/plugins/theme.lua", -- Described below
-  livePreview = true, -- Apply theme while browsing. Default to true.
+  livePreview = true,                                              -- Apply theme while browsing. Default to true.
 })
 require('rose-pine').setup({
   dark_variant = 'moon'
@@ -1218,18 +1338,14 @@ require('rose-pine').setup({
 
 -- local animate = require('mini.animate')
 -- animate.setup({
-    -- scroll = {
-      -- -- Animate for 200 milliseconds with linear easing
-      -- timing = animate.gen_timing.linear({ duration = 20, unit = 'total' }),
+-- scroll = {
+-- -- Animate for 200 milliseconds with linear easing
+-- timing = animate.gen_timing.linear({ duration = 20, unit = 'total' }),
 
-      -- -- Animate equally but with at most 120 steps instead of default 60
-      -- subscroll = animate.gen_subscroll.equal({ max_output_steps = 120 }),
-    -- }
-  -- })
+-- -- Animate equally but with at most 120 steps instead of default 60
+-- subscroll = animate.gen_subscroll.equal({ max_output_steps = 120 }),
+-- }
+-- })
 
 require("custom.plugins.theme")
 -- require("custom.plugins.debug")
-
-
-
-
