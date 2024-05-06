@@ -173,6 +173,12 @@ require('lazy').setup({
     event = "VeryLazy",
   },
 
+  {'akinsho/toggleterm.nvim',
+    version = "*",
+    -- opts = {[> things you want to change go here<]},
+    event = "VeryLazy",
+  },
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -641,6 +647,8 @@ vim.api.nvim_set_keymap("n", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>
 vim.api.nvim_set_keymap("v", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", { noremap = true, silent = true });
 
 vim.keymap.set("n", "<leader>cf", "0<c-g>", { desc = "Show full file path" })
+
+vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=float<cr>", { desc = "ToggleTerm float" })
 
 -- jump list + buffer
 function jumps_fileCO(direction)
@@ -1309,4 +1317,7 @@ require('rose-pine').setup({
 -- })
 
 require("custom.plugins.theme")
+
+require("toggleterm").setup()
+
 -- require("custom.plugins.debug")
