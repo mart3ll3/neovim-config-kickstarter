@@ -399,6 +399,17 @@ require('lazy').setup({
     "preservim/nerdcommenter",
     event = "VeryLazy",
   },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("refactoring").setup()
+    end,
+  },
   -- { 'echasnovski/mini.animate', version = '*' },
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -606,6 +617,19 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Harpoon shortcuts
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
+
+
+vim.keymap.set("x", "<leader>re", ":Refactor extract ")
+vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
+
+vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
+
+vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
+
+vim.keymap.set( "n", "<leader>rI", ":Refactor inline_func")
+
+vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
+vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
 
 -- Outline
 vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>", { desc = "Show Outline for current buffer" })
@@ -1319,5 +1343,7 @@ require('rose-pine').setup({
 require("custom.plugins.theme")
 
 require("toggleterm").setup()
+
+require('refactoring').setup()
 
 -- require("custom.plugins.debug")
