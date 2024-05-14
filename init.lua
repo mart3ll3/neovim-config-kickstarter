@@ -347,8 +347,8 @@ require('lazy').setup({
     },
     -- {"simrat39/symbols-outline.nvim"},
     -- {
-        -- "stevearc/aerial.nvim",
-        -- event = "VeryLazy",
+    -- "stevearc/aerial.nvim",
+    -- event = "VeryLazy",
     -- },
     {
         "godlygeek/tabular",
@@ -412,6 +412,20 @@ require('lazy').setup({
             require("refactoring").setup()
         end,
     },
+    {
+        "ray-x/go.nvim",
+        dependencies = { -- optional packages
+            "ray-x/guihua.lua",
+            "neovim/nvim-lspconfig",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("go").setup()
+        end,
+        event = { "CmdlineEnter" },
+        ft = { "go", 'gomod' },
+        build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    },
     -- { 'echasnovski/mini.animate', version = '*' },
 
     -- Fuzzy Finder (files, lsp, etc)
@@ -463,39 +477,39 @@ require('lazy').setup({
             'nvim-tree/nvim-web-devicons',     -- optional
         }
     },
-{
-  "nvim-java/nvim-java",
-  dependencies = {
-    "nvim-java/lua-async-await",
-    "nvim-java/nvim-java-refactor",
-    "nvim-java/nvim-java-core",
-    "nvim-java/nvim-java-test",
-    "nvim-java/nvim-java-dap",
-    "MunifTanjim/nui.nvim",
-    "neovim/nvim-lspconfig",
-    "mfussenegger/nvim-dap",
     {
-      "williamboman/mason.nvim",
-      opts = {
-        registries = {
-          "github:nvim-java/mason-registry",
-          "github:mason-org/mason-registry",
+        "nvim-java/nvim-java",
+        dependencies = {
+            "nvim-java/lua-async-await",
+            "nvim-java/nvim-java-refactor",
+            "nvim-java/nvim-java-core",
+            "nvim-java/nvim-java-test",
+            "nvim-java/nvim-java-dap",
+            "MunifTanjim/nui.nvim",
+            "neovim/nvim-lspconfig",
+            "mfussenegger/nvim-dap",
+            {
+                "williamboman/mason.nvim",
+                opts = {
+                    registries = {
+                        "github:nvim-java/mason-registry",
+                        "github:mason-org/mason-registry",
+                    },
+                },
+            },
+            {
+                "williamboman/mason-lspconfig.nvim",
+                opts = {
+                    handlers = {
+                        ["jdtls"] = function()
+                            require("java").setup()
+                        end,
+                    },
+                },
+            },
         },
-      },
+        opts = {},
     },
-    {
-      "williamboman/mason-lspconfig.nvim",
-      opts = {
-        handlers = {
-          ["jdtls"] = function()
-            require("java").setup()
-          end,
-        },
-      },
-    },
-  },
-  opts = {},
-},
 
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
     --       These are some example plugins that I've included in the kickstart repository.
@@ -681,11 +695,11 @@ vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
 -- Outline
 -- vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>", { desc = "Show Outline for current buffer" })
 -- require("aerial").setup({
-    -- on_attach = function(bufnr)
-        -- -- Jump forwards/backwards with '{' and '}'
-        -- vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-        -- vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
-    -- end,
+-- on_attach = function(bufnr)
+-- -- Jump forwards/backwards with '{' and '}'
+-- vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+-- vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+-- end,
 -- })
 
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon Add File" })
@@ -1407,9 +1421,21 @@ require("lspsaga").setup({
     symbols_in_winbar = {
         enable = false
     },
-  lightbulb = {
-    enable = false,
-    enable_in_insert = false,
-  },
+    lightbulb = {
+        enable = false,
+        enable_in_insert = false,
+    },
 })
+require('go').setup()
+
+local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
+    callback = function()
+        require('go.format').goimports()
+    end,
+    group = format_sync_grp,
+})
+
+
 -- require("custom.plugins.debug")
