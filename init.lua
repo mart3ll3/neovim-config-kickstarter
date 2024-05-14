@@ -346,10 +346,10 @@ require('lazy').setup({
         event = "VeryLazy",
     },
     -- {"simrat39/symbols-outline.nvim"},
-    {
-        "stevearc/aerial.nvim",
-        event = "VeryLazy",
-    },
+    -- {
+        -- "stevearc/aerial.nvim",
+        -- event = "VeryLazy",
+    -- },
     {
         "godlygeek/tabular",
         event = "VeryLazy",
@@ -646,14 +646,14 @@ vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
 vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
 
 -- Outline
-vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>", { desc = "Show Outline for current buffer" })
-require("aerial").setup({
-    on_attach = function(bufnr)
-        -- Jump forwards/backwards with '{' and '}'
-        vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-        vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
-    end,
-})
+-- vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>", { desc = "Show Outline for current buffer" })
+-- require("aerial").setup({
+    -- on_attach = function(bufnr)
+        -- -- Jump forwards/backwards with '{' and '}'
+        -- vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+        -- vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+    -- end,
+-- })
 
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon Add File" })
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, { desc = "Harpoon Toggle Quick menu" })
@@ -957,6 +957,7 @@ local on_attach = function(_, bufnr)
 
     vim.keymap.set('n', '<leader>kj', '<Cmd>Lspsaga diagnostic_jump_next<CR>', optsSaga)
     vim.keymap.set('n', '<leader>rn', '<Cmd>Lspsaga rename<CR>', optsSaga)
+    vim.keymap.set('n', '<leader>o', '<Cmd>Lspsaga outline<CR>', optsSaga)
 
     -- Lesser used LSP functionality
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -1216,7 +1217,7 @@ vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
 vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
 
 -- require("symbols-outline").setup()
-require("aerial").setup()
+-- require("aerial").setup()
 require("nvim-autopairs").setup({
     disable_filetype = { 'TelescopePrompt', 'vim' }
 })
