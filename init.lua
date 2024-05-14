@@ -1406,6 +1406,10 @@ require('refactoring').setup()
 require("lspsaga").setup({
     symbols_in_winbar = {
         enable = false
-    }
+    },
+  lightbulb = {
+    enable = false,
+    enable_in_insert = false,
+  },
 })
 -- require("custom.plugins.debug")
