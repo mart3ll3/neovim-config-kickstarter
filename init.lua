@@ -359,8 +359,8 @@ require('lazy').setup({
         event = "VeryLazy",
     },
     -- {
-        -- "LunarVim/bigfile.nvim",
-        -- event = "VeryLazy",
+    -- "LunarVim/bigfile.nvim",
+    -- event = "VeryLazy",
     -- },
     {
         "folke/trouble.nvim",
@@ -425,6 +425,16 @@ require('lazy').setup({
         event = { "CmdlineEnter" },
         ft = { "go", 'gomod' },
         build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    },
+    {
+        'Exafunction/codeium.vim',
+        event = 'BufEnter'
+    },
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
+        opts = {},
+        config = function(_, opts) require 'lsp_signature'.setup(opts) end
     },
     -- { 'echasnovski/mini.animate', version = '*' },
 
@@ -649,7 +659,7 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go Window to the right" })
 vim.keymap.set("n", "<C-Up>", ":horizontal resize +2<CR>")
 vim.keymap.set("n", "<C-Down>", ":horizontal resize -2<CR>")
 vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
-vim.keymap.set("n", "<C-m>", ":vertical resize +2<CR>")
+-- vim.keymap.set("n", "<C-m>", ":vertical resize +2<CR>")
 vim.keymap.set("n", "<C-,>", ":horizontal resize +2<CR>")
 vim.keymap.set("n", "<C-Right>", ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-/>", ":vertical resize -2<CR>")
@@ -705,10 +715,10 @@ vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon Add File" })
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, { desc = "Harpoon Toggle Quick menu" })
 
-vim.keymap.set("n", "<C-p>", function() ui.nav_file(1) end, { desc = "Harpoon File #1" })
-vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end, { desc = "Harpoon File #2" })
-vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end, { desc = "Harpoon File #3" })
-vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Harpoon File #4" })
+vim.keymap.set("n", "<C-f>", function() ui.nav_file(1) end, { desc = "Harpoon File #1" })
+vim.keymap.set("n", "<C-p>", function() ui.nav_file(2) end, { desc = "Harpoon File #2" })
+vim.keymap.set("n", "<C-s>", function() ui.nav_file(3) end, { desc = "Harpoon File #3" })
+vim.keymap.set("n", "<C-n>", function() ui.nav_file(4) end, { desc = "Harpoon File #4" })
 
 -- Fugitive shortcuts
 vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git Status" })
@@ -733,7 +743,8 @@ vim.api.nvim_set_keymap("v", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>
 
 vim.keymap.set("n", "<leader>cf", "0<c-g>", { desc = "Show full file path" })
 
-vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=float<cr>", { desc = "ToggleTerm float" })
+vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { desc = "ToggleTerm float" })
+vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { desc = "ToggleTerm float" })
 
 -- jump list + buffer
 function jumps_fileCO(direction)
@@ -1275,26 +1286,26 @@ require("nvim-ts-autotag").setup()
 --
 --
 -- require("bigfile").setup {
-    -- -- filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
-    -- pattern = function(bufnr, filesize_mib)
-        -- -- you can't use `nvim_buf_line_count` because this runs on BufReadPre
-        -- local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
-        -- local file_length = #file_contents
-        -- local filetype = vim.filetype.match({ buf = bufnr })
-        -- if file_length > 5000 and filetype == "cs" then
-            -- return true
-        -- end
-    -- end,
-    -- features = { -- features to disable
-        -- "indent_blankline",
-        -- "illuminate",
-        -- -- "lsp",
-        -- -- "treesitter",
-        -- -- "syntax",
-        -- -- "matchparen",
-        -- -- "vimopts",
-        -- -- "filetype",
-    -- },
+-- -- filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
+-- pattern = function(bufnr, filesize_mib)
+-- -- you can't use `nvim_buf_line_count` because this runs on BufReadPre
+-- local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
+-- local file_length = #file_contents
+-- local filetype = vim.filetype.match({ buf = bufnr })
+-- if file_length > 5000 and filetype == "cs" then
+-- return true
+-- end
+-- end,
+-- features = { -- features to disable
+-- "indent_blankline",
+-- "illuminate",
+-- -- "lsp",
+-- -- "treesitter",
+-- -- "syntax",
+-- -- "matchparen",
+-- -- "vimopts",
+-- -- "filetype",
+-- },
 -- }
 
 -- Using before and after.
