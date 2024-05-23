@@ -430,12 +430,12 @@ require('lazy').setup({
         'Exafunction/codeium.vim',
         event = 'BufEnter'
     },
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "VeryLazy",
-        opts = {},
-        config = function(_, opts) require 'lsp_signature'.setup(opts) end
-    },
+    -- {
+    -- "ray-x/lsp_signature.nvim",
+    -- event = "VeryLazy",
+    -- opts = {},
+    -- config = function(_, opts) require 'lsp_signature'.setup(opts) end
+    -- },
     -- { 'echasnovski/mini.animate', version = '*' },
 
     -- Fuzzy Finder (files, lsp, etc)
@@ -614,6 +614,7 @@ vim.o.cursorline = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 -- vim.cmd.colorscheme "catppuccin"
+vim.g.codeium_disable_bindings = 1
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -660,7 +661,7 @@ vim.keymap.set("n", "<C-Up>", ":horizontal resize +2<CR>")
 vim.keymap.set("n", "<C-Down>", ":horizontal resize -2<CR>")
 vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
 -- vim.keymap.set("n", "<C-m>", ":vertical resize +2<CR>")
-vim.keymap.set("n", "<C-,>", ":horizontal resize +2<CR>")
+-- vim.keymap.set("n", "<C-,>", ":horizontal resize +2<CR>")
 vim.keymap.set("n", "<C-Right>", ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-/>", ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-.>", ":horizontal resize -2<CR>")
@@ -775,9 +776,13 @@ function jumps_fileCO(direction)
     end
 end
 
-vim.keymap.set("n", "<c-;>", "<cmd>lua jumps_fileCO('forward')<cr>", { desc = "Next buffer in jump list" })
+-- vim.keymap.set("n", "<c-;>", "<cmd>lua jumps_fileCO('forward')<cr>", { desc = "Next buffer in jump list" })
 vim.keymap.set("n", "<c-g>", "<cmd>lua jumps_fileCO()<cr>", { desc = "Prev buffer in jump list" })
 
+vim.keymap.set('i', '<C-y>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end)
+vim.keymap.set('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end)
+vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -1185,6 +1190,16 @@ require("noice").setup({
         inc_rename = false,           -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = false,       -- add a border to hover docs and signature help
     },
+    routes = {
+        {
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "written",
+            },
+            opts = { skip = true },
+        },
+    },
 })
 
 require('lualine').setup {
@@ -1260,7 +1275,10 @@ bufferline.setup {
                 text_align = "center",
                 separator = true
             }
-        }
+        },
+        indicator = {
+            style = "underline",
+        },
     }
 }
 
