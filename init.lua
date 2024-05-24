@@ -45,6 +45,10 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+local utils = require "base.utils"
+local windows = vim.fn.has('win32') == 1             -- true if on windows
+local android = vim.fn.isdirectory('/system') == 1   -- true if on android
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -145,21 +149,88 @@ require('lazy').setup({
             },
         },
     },
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        opts = {
-            -- add any options here
-        },
-        dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
-            -- OPTIONAL:
-            --   `nvim-notify` is only needed, if you want to use the notification view.
-            --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
-        }
+
+  {
+    "rcarriga/nvim-notify",
+    init = function()
+      require("base.utils").load_plugin_with_func("nvim-notify", vim, "notify")
+    end,
+    opts = {
+      on_open = function(win)
+        vim.api.nvim_win_set_config(win, { zindex = 175 })
+        if not vim.g.notifications_enabled then
+          vim.api.nvim_win_close(win, true)
+        end
+        if not package.loaded["nvim-treesitter"] then
+          pcall(require, "nvim-treesitter")
+        end
+        vim.wo[win].conceallevel = 3
+        local buf = vim.api.nvim_win_get_buf(win)
+        if not pcall(vim.treesitter.start, buf, "markdown") then
+          vim.bo[buf].syntax = "markdown"
+        end
+        vim.wo[win].spell = false
+      end,
     },
+    config = function(_, opts)
+      local notify = require "notify"
+      notify.setup(opts)
+      vim.notify = notify
+    end,
+  },
+
+  {
+    "petertriho/nvim-scrollbar",
+    event = "User BaseFile",
+    opts = {
+      handlers = {
+        gitsigns = true, -- gitsigns integration (display hunks)
+        ale = true,      -- lsp integration (display errors/warnings)
+        search = false,  -- hlslens integration (display search result)
+      },
+      excluded_filetypes = {
+        "cmp_docs",
+        "cmp_menu",
+        "noice",
+        "prompt",
+        "TelescopePrompt",
+        "alpha",
+      },
+    },
+  },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = function()
+      local enable_conceal = false          -- Hide command text if true
+      return {
+        presets = { bottom_search = true }, -- The kind of popup used for /
+        cmdline = {
+          view = "cmdline",                 -- The kind of popup used for :
+          format= {
+            cmdline =     { conceal = enable_conceal },
+            search_down = { conceal = enable_conceal },
+            search_up =   { conceal = enable_conceal },
+            filter =      { conceal = enable_conceal },
+            lua =         { conceal = enable_conceal },
+            help =        { conceal = enable_conceal },
+            input =       { conceal = enable_conceal },
+          }
+        },
+
+        -- Disable every other noice feature
+        messages = { enabled = false },
+        lsp = {
+          hover = { enabled = false },
+          signature = { enabled = false },
+          progress = { enabled = false },
+          message = { enabled = false },
+          smart_move = { enabled = false },
+        },
+      }
+    end
+  },
     {
         'mfussenegger/nvim-dap',
         event = "VeryLazy",
@@ -1173,34 +1244,34 @@ require("ibl").setup { scope = { highlight = highlight } }
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
 
-require("noice").setup({
-    lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-        },
-    },
-    -- you can enable a preset for easier configuration
-    presets = {
-        bottom_search = true,         -- use a classic bottom cmdline for search
-        command_palette = true,       -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false,       -- add a border to hover docs and signature help
-    },
-    routes = {
-        {
-            filter = {
-                event = "msg_show",
-                kind = "",
-                find = "written",
-            },
-            opts = { skip = true },
-        },
-    },
-})
+-- require("noice").setup({
+    -- lsp = {
+        -- -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        -- override = {
+            -- ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            -- ["vim.lsp.util.stylize_markdown"] = true,
+            -- ["cmp.entry.get_documentation"] = true,
+        -- },
+    -- },
+    -- -- you can enable a preset for easier configuration
+    -- presets = {
+        -- bottom_search = true,         -- use a classic bottom cmdline for search
+        -- command_palette = true,       -- position the cmdline and popupmenu together
+        -- long_message_to_split = true, -- long messages will be sent to a split
+        -- inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+        -- lsp_doc_border = false,       -- add a border to hover docs and signature help
+    -- },
+    -- routes = {
+        -- {
+            -- filter = {
+                -- event = "msg_show",
+                -- kind = "",
+                -- find = "written",
+            -- },
+            -- opts = { skip = true },
+        -- },
+    -- },
+-- })
 
 require('lualine').setup {
     options = {
@@ -1456,6 +1527,7 @@ require("lspsaga").setup({
     },
 })
 require('go').setup()
+require('scrollbar').setup()
 
 local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
