@@ -1129,7 +1129,7 @@ local servers = {
             telemetry = { enable = false },
         },
     },
-    omnisharp = {
+    csharp_ls = {
         filetypes = { 'cs' }
     },
 
