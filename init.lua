@@ -753,9 +753,11 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
 -- Clear highlights
 vim.keymap.set("n", "<leader>hh", "<cmd>nohlsearch<CR>", { desc = "Clear highlights" })
 -- Close buffers
-vim.keymap.set("n", "<leader>bd", "<cmd>Bdelete!<CR>", { desc = "[B]uffer Force [D]elete" })
-vim.keymap.set("n", "<leader>ba", "<cmd>bufdo bwipeout<cr>", { desc = "[B]uffers Close [A]ll" })
+-- vim.keymap.set("n", "<leader>bd", "<cmd>Bdelete!<CR>", { desc = "[B]uffer Force [D]elete" })
+vim.keymap.set("n", "<leader>ba", "<cmd>bufdo Bwipeout<cr>", { desc = "[B]uffers Close [A]ll" })
+-- vim.keymap.set("n", "<leader>ba", "<cmd>Bdeleteall<cr>", { desc = "[B]uffers Close [A]ll" })
 vim.keymap.set("n", "<leader>bu", "<cmd>%bd|e#<CR>", { desc = "[B]uffers Close All B[u]t This" })
+-- vim.keymap.set("n", "<leader>bu", "<cmd>Bdeleteexcept<CR>", { desc = "[B]uffers Close All B[u]t This" })
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "[B]uffer [N]ew " })
 
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
