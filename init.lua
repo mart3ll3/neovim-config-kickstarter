@@ -537,6 +537,53 @@ require('lazy').setup({
     end,
     config = function(_, opts) require('lsp_signature').setup(opts) end
   },
+  {
+    "nvim-neotest/neotest",
+    cmd = { "Neotest" },
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "sidlatau/neotest-dart",
+      "Issafalcon/neotest-dotnet",
+      "jfpedroza/neotest-elixir",
+      "nvim-neotest/neotest-go",
+      "rcasia/neotest-java",
+      "nvim-neotest/neotest-jest",
+      "olimorris/neotest-phpunit",
+      "nvim-neotest/neotest-python",
+      "rouge8/neotest-rust",
+      "lawrence-laz/neotest-zig",
+    },
+    opts = function()
+      return {
+        -- your neotest config here
+        adapters = {
+          require("neotest-dart"),
+          require("neotest-dotnet"),
+          require("neotest-elixir"),
+          require("neotest-go"),
+          require("neotest-java"),
+          require("neotest-jest"),
+          require("neotest-phpunit"),
+          require("neotest-python"),
+          require("neotest-rust"),
+          require("neotest-zig"),
+        },
+      }
+    end,
+    config = function(_, opts)
+      -- get neotest namespace (api call creates or returns namespace)
+      local neotest_ns = vim.api.nvim_create_namespace "neotest"
+      vim.diagnostic.config({
+        virtual_text = {
+          format = function(diagnostic)
+            local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+            return message
+          end,
+        },
+      }, neotest_ns)
+      require("neotest").setup(opts)
+    end,
+  },
   -- { 'echasnovski/mini.animate', version = '*' },
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -785,6 +832,8 @@ vim.keymap.set("n", "<leader>ww", "<cmd>set wrap!<CR>", { desc = "Toggle [Wrap] 
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Vertically" })
 
 vim.keymap.set("n", "<leader>th", "<cmd>Themery<CR>", { desc = "Change [Th]eme" })
+vim.keymap.set("n", "<leader>tt", "<cmd>lua require('neotest').run.run()<cr>", { desc = "Run Closes Test" })
+vim.keymap.set("n", "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", { desc = "Run All Tests in File" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
