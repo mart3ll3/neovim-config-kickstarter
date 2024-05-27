@@ -1167,7 +1167,7 @@ local on_attach = function(_, bufnr)
 
   local optsSaga = { noremap = true, silent = true }
   vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', optsSaga)
-  vim.keymap.set('i', '<leader>K', '<Cmd>Lspsaga signature_help<CR>', optsSaga)
+  -- vim.keymap.set('i', '<leader>K', '<Cmd>Lspsaga signature_help<CR>', optsSaga)
   vim.keymap.set('n', '<leader>kp', '<Cmd>Lspsaga peek_definition<CR>', optsSaga)
   vim.keymap.set('n', '<leader>kd', '<cmd>Lspsaga finder<CR>')
 
