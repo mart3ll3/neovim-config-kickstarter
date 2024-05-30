@@ -152,6 +152,7 @@ require('lazy').setup({
 
   {
     "rcarriga/nvim-notify",
+    event = "VeryLazy",
     init = function()
       require("base.utils").load_plugin_with_func("nvim-notify", vim, "notify")
     end,
@@ -181,7 +182,7 @@ require('lazy').setup({
 
   {
     "petertriho/nvim-scrollbar",
-    event = "User BaseFile",
+    event = "VeryLazy",
     opts = {
       handlers = {
         gitsigns = true, -- gitsigns integration (display hunks)
@@ -485,6 +486,7 @@ require('lazy').setup({
   },
   {
     "ray-x/go.nvim",
+    event = "VeryLazy",
     dependencies = { -- optional packages
       "ray-x/guihua.lua",
       "neovim/nvim-lspconfig",
@@ -499,10 +501,12 @@ require('lazy').setup({
   },
   {
     'Exafunction/codeium.vim',
-    event = 'BufEnter'
+    event = "VeryLazy",
+    -- event = 'BufEnter'
   },
   {
     "max397574/better-escape.nvim",
+    event = "VeryLazy",
     config = function()
       require("better_escape").setup()
     end,
@@ -513,7 +517,8 @@ require('lazy').setup({
   },
   {
     "ray-x/lsp_signature.nvim",
-    event = "User BaseFile",
+    event = "VeryLazy",
+    -- event = "User BaseFile",
     opts = function()
       -- Apply globals from 1-options.lua
       local is_enabled = vim.g.lsp_signature_enabled
@@ -539,6 +544,7 @@ require('lazy').setup({
   },
   {
     "nvim-neotest/neotest",
+    event = "VeryLazy",
     cmd = { "Neotest" },
     dependencies = {
       "nvim-neotest/nvim-nio",
@@ -627,6 +633,7 @@ require('lazy').setup({
 
   {
     'nvimdev/lspsaga.nvim',
+    event = "VeryLazy",
     -- config = function()
     -- require('lspsaga').setup({})
     -- end,
@@ -637,6 +644,7 @@ require('lazy').setup({
   },
   {
     "nvim-java/nvim-java",
+    event = "VeryLazy",
     dependencies = {
       "nvim-java/lua-async-await",
       "nvim-java/nvim-java-refactor",
