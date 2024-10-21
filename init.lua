@@ -665,13 +665,13 @@ require('lazy').setup({
       },
       {
         "williamboman/mason-lspconfig.nvim",
-        opts = {
-          handlers = {
-            ["jdtls"] = function()
-              require("java").setup()
-            end,
-          },
-        },
+        -- opts = {
+          -- handlers = {
+            -- ["jdtls"] = function()
+              -- require("java").setup()
+            -- end,
+          -- },
+        -- },
       },
     },
     opts = {},
@@ -960,12 +960,21 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
+    -- mappings = {
+      -- i = {
+        -- ['<C-u>'] = false,
+        -- ['<C-d>'] = false,
+      -- },
+    -- },
+    layout_strategy = 'vertical',
+    layout_config = {
+      vertical = {
+        preview_cutoff = 1,
+        prompt_position = "bottom",
+        height = 0.98,
+        preview_height = 0.65
+      }
+    }
   },
 }
 
