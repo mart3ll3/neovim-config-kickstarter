@@ -343,6 +343,18 @@ require('lazy').setup({
     name = "catppuccin",
     priority = 1000
   },
+{ "Mofiqul/dracula.nvim",
+  event = "VeryLazy"},
+{
+  "vague2k/vague.nvim",
+    event = "VeryLazy",
+  config = function()
+    -- NOTE: you do not need to call setup if you don't want to.
+    require("vague").setup({
+      -- optional configuration here
+    })
+  end
+},
   {
     "rebelot/kanagawa.nvim",
     event = "VeryLazy",
@@ -499,11 +511,11 @@ require('lazy').setup({
     ft = { "go", 'gomod' },
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
-  {
-    'Exafunction/codeium.vim',
-    event = "VeryLazy",
-    -- event = 'BufEnter'
-  },
+  -- {
+    -- 'Exafunction/codeium.vim',
+    -- event = "VeryLazy",
+    -- -- event = 'BufEnter'
+  -- },
   {
     "max397574/better-escape.nvim",
     event = "VeryLazy",
@@ -676,7 +688,14 @@ require('lazy').setup({
     },
     opts = {},
   },
-
+{
+  "MeanderingProgrammer/render-markdown.nvim",
+  opts = {
+    file_types = { "markdown", "Avante" },
+  },
+  ft = { "markdown", "Avante" },
+},
+  
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -690,7 +709,7 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   --
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins.avante' },
 }, {})
 
 -- [[ Setting options ]]
@@ -717,7 +736,7 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.showmatch = true
 vim.opt.synmaxcol = 300
-vim.opt.laststatus = 2 -- always show statusline
+vim.opt.laststatus = 3 -- always show statusline
 
 -- Sidebar
 vim.opt.numberwidth = 3
@@ -770,7 +789,7 @@ vim.o.cursorline = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 -- vim.cmd.colorscheme "catppuccin"
-vim.g.codeium_disable_bindings = 1
+-- vim.g.codeium_disable_bindings = 1
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -789,6 +808,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- vim.keymap.set("n", "<C-u>", "<Cmd>lua vim.cmd('normal! <C-u>'); MiniAnimate.execute_after('scroll', 'normal! zz')<CR>")
 
+vim.keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
@@ -809,21 +829,25 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Show UndoTree
 
 
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go Window to the left" })
+vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = "Go Window to the left" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go Window to the down" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go Window to the up" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go Window to the right" })
+vim.keymap.set("n", "<C-Right>", "<C-w>l", { desc = "Go Window to the right" })
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":horizontal resize +2<CR>")
 vim.keymap.set("n", "<C-Down>", ":horizontal resize -2<CR>")
-vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
+-- vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
 -- vim.keymap.set("n", "<C-m>", ":vertical resize +2<CR>")
 -- vim.keymap.set("n", "<C-,>", ":horizontal resize +2<CR>")
-vim.keymap.set("n", "<C-Right>", ":vertical resize -2<CR>")
+-- vim.keymap.set("n", "<C-Right>", ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-/>", ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-.>", ":horizontal resize -2<CR>")
 -- Navigate buffers
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
+vim.keymap.set("n", "<S-Right>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true })
+vim.keymap.set("n", "<S-Left>", ":bprevious<CR>", { silent = true })
 -- Clear highlights
 vim.keymap.set("n", "<leader>hh", "<cmd>nohlsearch<CR>", { desc = "Clear highlights" })
 -- Close buffers
@@ -835,14 +859,16 @@ vim.keymap.set("n", "<leader>ba", "<cmd>bufdo Bwipeout<cr>", { desc = "[B]uffers
 vim.keymap.set("n", "<leader>bu", "<cmd>Bdeleteexcept<CR>", { desc = "[B]uffers Close All B[u]t This" })
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "[B]uffer [N]ew " })
 
-vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
-vim.keymap.set("n", "<leader>ww", "<cmd>set wrap!<CR>", { desc = "Toggle [Wrap] lines" })
+-- vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
+-- vim.keymap.set("n", "<leader>ww", "<cmd>set wrap!<CR>", { desc = "Toggle [Wrap] lines" })
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Vertically" })
 
 vim.keymap.set("n", "<leader>th", "<cmd>Themery<CR>", { desc = "Change [Th]eme" })
 vim.keymap.set("n", "<leader>tt", "<cmd>lua require('neotest').run.run()<cr>", { desc = "Run Closes Test" })
 vim.keymap.set("n", "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", { desc = "Run All Tests in File" })
-
+vim.keymap.set("n", "<leader>ta", "<cmd>lua require('neotest').run.run(vim.fn.getcwd())<cr>", { desc = "Run All Tests" })
+vim.keymap.set("n", "<leader>to", "<cmd>lua require('neotest').summary.toggle()<cr>", { desc = "Tests Toggle" })
+--
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -861,8 +887,8 @@ vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
 
 vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
 
-vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
-vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
+vim.keymap.set("n", "<leader>re", ":Refactor extract_block")
+vim.keymap.set("n", "<leader>rf", ":Refactor extract_block_to_file")
 
 -- Outline
 -- vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>", { desc = "Show Outline for current buffer" })
@@ -874,7 +900,7 @@ vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
 -- end,
 -- })
 
-vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Harpoon Add File" })
+vim.keymap.set("n", "<leader>ae", mark.add_file, { desc = "Harpoon Add File" })
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, { desc = "Harpoon Toggle Quick menu" })
 
 vim.keymap.set("n", "<C-f>", function() ui.nav_file(1) end, { desc = "Harpoon File #1" })
@@ -940,10 +966,10 @@ end
 -- vim.keymap.set("n", "<c-;>", "<cmd>lua jumps_fileCO('forward')<cr>", { desc = "Next buffer in jump list" })
 vim.keymap.set("n", "<c-g>", "<cmd>lua jumps_fileCO()<cr>", { desc = "Prev buffer in jump list" })
 
-vim.keymap.set('i', '<C-y>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end)
-vim.keymap.set('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end)
-vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+-- vim.keymap.set('i', '<C-y>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+-- vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end)
+-- vim.keymap.set('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end)
+-- vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -1176,7 +1202,7 @@ local on_attach = function(_, bufnr)
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   -- nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -1194,11 +1220,11 @@ local on_attach = function(_, bufnr)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+  -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+  -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  -- nmap('<leader>wl', function()
+    -- print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  -- end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -1591,8 +1617,16 @@ require("themery").setup({
         vim.opt.background = "dark"
       ]],
     },
+    {
+      name = "Dracula",
+      colorscheme = "dracula",
+    },
+    {
+      name = "Vague",
+      colorscheme = "vague",
+    },
   },
-  themeConfigFile = "~/.config/nvim/lua/custom/plugins/theme.lua", -- Described below
+  -- themeConfigFile = "~/.config/nvim/lua/custom/plugins/theme.lua", -- Described below
   livePreview = true,                                              -- Apply theme while browsing. Default to true.
 })
 require('rose-pine').setup({
@@ -1611,6 +1645,7 @@ require('rose-pine').setup({
 -- })
 
 require("custom.plugins.theme")
+-- require("custom.plugins.avante")
 
 require("toggleterm").setup()
 
