@@ -928,6 +928,9 @@ vim.api.nvim_set_var("NERDSpaceDelims", 1);
 -- shortcuts to toggle
 vim.api.nvim_set_keymap("n", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", { noremap = true, silent = true });
 vim.api.nvim_set_keymap("v", ",c", ":call nerdcommenter#Comment(0, 'toggle')<CR>", { noremap = true, silent = true });
+vim.api.nvim_set_keymap("n", "<leader>/", ":call nerdcommenter#Comment(0, 'toggle')<CR>", { noremap = true, silent = true });
+vim.api.nvim_set_keymap("v", "<leader>/", ":call nerdcommenter#Comment(0, 'toggle')<CR>", { noremap = true, silent = true });
+
 
 vim.keymap.set("n", "<leader>cf", "0<c-g>", { desc = "Show full file path" })
 
