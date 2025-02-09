@@ -1,5 +1,6 @@
 --[[
 --
+--
 --aasdk
 
 =====================================================================
@@ -1794,4 +1795,5 @@ require 'lsp_signature'.setup(cfg)
           end,
         },
       }
+MiniIcons.mock_nvim_web_devicons()
 -- require("custom.plugins.debug")
