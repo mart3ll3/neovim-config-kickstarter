@@ -110,10 +110,10 @@ require('lazy').setup({
     event = "VeryLazy",
   },
   -- 'prichrd/netrw.nvim',
-  {
-    'nvim-tree/nvim-tree.lua',
-    event = "VeryLazy",
-  },
+  -- {
+    -- 'nvim-tree/nvim-tree.lua',
+    -- event = "VeryLazy",
+  -- },
   -- 'm4xshen/autoclose.nvim',
   {
     'windwp/nvim-autopairs',
@@ -825,7 +825,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>dd", [["_d]])
 vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "[F]ormat Document" })
-vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, { desc = "Show Nvim Tree" })
+-- vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, { desc = "Show Nvim Tree" })
 vim.keymap.set("n", "<leader>fu", ":NvimTreeResize -10<cr>", { desc = "Make smaller Nvim Tree" })
 vim.keymap.set("n", "<leader>fi", ":NvimTreeResize +10<cr>", { desc = "Enlarge Nvim Tree" })
 vim.keymap.set("n", "<leader>fs", vim.cmd.NvimTreeFindFile)
@@ -949,10 +949,10 @@ vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { desc = "To
 vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { desc = "ToggleTerm float" })
 
       -- Open parent directory in current window
-      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+      -- vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
       -- Open parent directory in floating window
-      vim.keymap.set("n", "<space>-", require("oil").toggle_float)
+      vim.keymap.set("n", "<space>e", require("oil").toggle_float)
 
 -- jump list + buffer
 function jumps_fileCO(direction)
@@ -1474,11 +1474,11 @@ require("flash").toggle(false)
 --   use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
 --   mappings = {}, -- Custom key mappings
 -- }
-require("nvim-tree").setup({
-  view = {
-    width = 40,
-  },
-})
+-- require("nvim-tree").setup({
+  -- view = {
+    -- width = 40,
+  -- },
+-- })
 
 local bufferline = require('bufferline')
 bufferline.setup {
