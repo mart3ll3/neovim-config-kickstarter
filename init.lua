@@ -539,6 +539,63 @@ require('lazy').setup({
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
   lazy = false,
 },
+-- {
+    -- "nvim-neorg/neorg",
+    -- lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+    -- version = "*", -- Pin Neorg to the latest stable release
+    -- config = true,
+-- },
+    {
+        "nvim-neorg/neorg",
+        build = ":Neorg sync-parsers",
+        dependencies = { 
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "hrsh7th/nvim-cmp",  -- for completion
+        },
+        config = function()
+            require("neorg").setup({
+                load = {
+                    ["core.defaults"] = {},
+                    ["core.concealer"] = {
+                        config = {
+                            icon_preset = "basic",
+                            icons = {
+                                delimiter = {
+                                    horizontal_line = {
+                                        visible = true,
+                                    },
+                                },
+                                heading = {
+                                    dots = false,
+                                    level_1 = {
+                                        icon = "◉",
+                                        preset = true,
+                                    },
+                                    level_2 = {
+                                        icon = "○",
+                                        preset = true,
+                                    },
+                                    level_3 = {
+                                        icon = "✿",
+                                        preset = true,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                    ["core.dirman"] = {
+                        config = {
+                            workspaces = {
+                                notes = "~/Documents/Projects/Notes",
+                            },
+                            default_workspace = "notes",
+                        },
+                    },
+                },
+            })
+        end,
+    },
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
@@ -761,6 +818,8 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "120"
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = 'nc'
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -1082,6 +1141,8 @@ require('nvim-treesitter.configs').setup {
     'xml',
     'c_sharp',
     'java',
+    'norg',
+    'norg_meta'
   },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
@@ -1795,5 +1856,7 @@ require 'lsp_signature'.setup(cfg)
           end,
         },
       }
+
+
 MiniIcons.mock_nvim_web_devicons()
 -- require("custom.plugins.debug")
