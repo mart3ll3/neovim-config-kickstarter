@@ -539,12 +539,6 @@ require('lazy').setup({
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
   lazy = false,
 },
--- {
-    -- "nvim-neorg/neorg",
-    -- lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-    -- version = "*", -- Pin Neorg to the latest stable release
-    -- config = true,
--- },
     {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers",
@@ -557,6 +551,8 @@ require('lazy').setup({
             require("neorg").setup({
                 load = {
                     ["core.defaults"] = {},
+                    ["core.integrations.treesitter"] = {},
+                    ["core.journal"] = {},
                     ["core.concealer"] = {
                         config = {
                             icon_preset = "basic",
