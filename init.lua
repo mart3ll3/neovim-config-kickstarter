@@ -539,59 +539,78 @@ require('lazy').setup({
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
   lazy = false,
 },
-    {
-        "nvim-neorg/neorg",
-        build = ":Neorg sync-parsers",
-        dependencies = { 
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "hrsh7th/nvim-cmp",  -- for completion
-        },
-        config = function()
-            require("neorg").setup({
-                load = {
-                    ["core.defaults"] = {},
-                    ["core.integrations.treesitter"] = {},
-                    ["core.journal"] = {},
-                    ["core.concealer"] = {
-                        config = {
-                            icon_preset = "basic",
-                            icons = {
-                                delimiter = {
-                                    horizontal_line = {
-                                        visible = true,
-                                    },
-                                },
-                                heading = {
-                                    dots = false,
-                                    level_1 = {
-                                        icon = "◉",
-                                        preset = true,
-                                    },
-                                    level_2 = {
-                                        icon = "○",
-                                        preset = true,
-                                    },
-                                    level_3 = {
-                                        icon = "✿",
-                                        preset = true,
-                                    },
-                                },
-                            },
-                        },
-                    },
-                    ["core.dirman"] = {
-                        config = {
-                            workspaces = {
-                                notes = "~/Documents/Projects/Notes",
-                            },
-                            default_workspace = "notes",
-                        },
-                    },
-                },
-            })
-        end,
+
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",  -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
     },
+  },
+{
+    'MeanderingProgrammer/render-markdown.nvim',
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+},
+    -- {
+        -- "nvim-neorg/neorg",
+        -- build = ":Neorg sync-parsers",
+        -- dependencies = { 
+            -- "nvim-lua/plenary.nvim",
+            -- "nvim-treesitter/nvim-treesitter",
+            -- "hrsh7th/nvim-cmp",  -- for completion
+        -- },
+        -- config = function()
+            -- require("neorg").setup({
+                -- load = {
+                    -- ["core.defaults"] = {},
+                    -- ["core.integrations.treesitter"] = {},
+                    -- ["core.journal"] = {},
+                    -- ["core.concealer"] = {
+                        -- config = {
+                            -- icon_preset = "basic",
+                            -- icons = {
+                                -- delimiter = {
+                                    -- horizontal_line = {
+                                        -- visible = true,
+                                    -- },
+                                -- },
+                                -- heading = {
+                                    -- dots = false,
+                                    -- level_1 = {
+                                        -- icon = "◉",
+                                        -- preset = true,
+                                    -- },
+                                    -- level_2 = {
+                                        -- icon = "○",
+                                        -- preset = true,
+                                    -- },
+                                    -- level_3 = {
+                                        -- icon = "✿",
+                                        -- preset = true,
+                                    -- },
+                                -- },
+                            -- },
+                        -- },
+                    -- },
+                    -- ["core.dirman"] = {
+                        -- config = {
+                            -- workspaces = {
+                                -- notes = "~/Documents/Projects/Notes",
+                            -- },
+                            -- default_workspace = "notes",
+                        -- },
+                    -- },
+                -- },
+            -- })
+        -- end,
+    -- },
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
@@ -1853,6 +1872,18 @@ require 'lsp_signature'.setup(cfg)
         },
       }
 
+require("obsidian").setup({
+  workspaces = {
+    {
+      name = "Notes",
+      -- path = "/Users/omerxx/Obsidian/Notes",
+      path = "~/Documents/Projects/Notes",
+    },
+  },
+  ui = { enable = false },
+})
+
+require('render-markdown').setup({})
 
 MiniIcons.mock_nvim_web_devicons()
 -- require("custom.plugins.debug")
