@@ -867,7 +867,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
-vim.o.guifont = "JetBrainsMono Nerd Font:h9"
+vim.o.guifont = "JetBrainsMono Nerd Font:h17"
 vim.o.lines = 999
 vim.o.columns = 999
 vim.o.cursorline = true
@@ -945,7 +945,7 @@ vim.keymap.set("n", "<leader>ba", "<cmd>bufdo Bwipeout<cr>", { desc = "[B]uffers
 vim.keymap.set("n", "<leader>bu", "<cmd>Bdeleteexcept<CR>", { desc = "[B]uffers Close All B[u]t This" })
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "[B]uffer [N]ew " })
 
--- vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Buffer Force Close" })
+vim.keymap.set("n", "<leader>bw", "<C-W>c", { desc = "Buffer Force Close" })
 -- vim.keymap.set("n", "<leader>ww", "<cmd>set wrap!<CR>", { desc = "Toggle [Wrap] lines" })
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Vertically" })
 
@@ -1156,8 +1156,8 @@ require('nvim-treesitter.configs').setup {
     'xml',
     'c_sharp',
     'java',
-    'norg',
-    'norg_meta'
+    -- 'norg',
+    -- 'norg_meta'
   },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)

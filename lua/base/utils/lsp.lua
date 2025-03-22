@@ -146,14 +146,14 @@ M.on_attach = function(client, bufnr)
   end
 
   -- TODO: Remove jdtls once it supports "textDocument/codeAction"
-  if client.supports_method "textDocument/codeAction"
-     or client.name == "jdtls" then
-    lsp_mappings.n["<leader>la"] = {
-      function() vim.lsp.buf.code_action() end,
-      desc = "LSP code action",
-    }
-    lsp_mappings.v["<leader>la"] = lsp_mappings.n["<leader>la"]
-  end
+  -- if client.supports_method "textDocument/codeAction"
+     -- or client.name == "jdtls" then
+    -- lsp_mappings.n["<leader>la"] = {
+      -- function() vim.lsp.buf.code_action() end,
+      -- desc = "LSP code action",
+    -- }
+    -- lsp_mappings.v["<leader>la"] = lsp_mappings.n["<leader>la"]
+  -- end
 
   if client.supports_method "textDocument/codeLens" then
     add_buffer_autocmd("lsp_codelens_refresh", bufnr, {
