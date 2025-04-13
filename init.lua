@@ -596,6 +596,33 @@ require('lazy').setup({
     ---@type render.md.UserConfig
     opts = {},
 },
+
+{
+    "aaronhallaert/advanced-git-search.nvim",
+    lazy = true,
+    cmd = { "AdvancedGitSearch" },
+    config = function()
+        -- optional: setup telescope before loading the extension
+        require("telescope").setup{
+            -- move this to the place where you call the telescope setup function
+            extensions = {
+                advanced_git_search = {
+                        -- See Config
+
+                    }
+            }
+        }
+
+        require("telescope").load_extension("advanced_git_search")
+    end,
+    dependencies = {
+       "nvim-telescope/telescope.nvim",
+          -- to show diff splits and open commits in browser
+          "tpope/vim-fugitive",
+          -- to open commits in browser with fugitive
+          "tpope/vim-rhubarb",       --- See dependencies
+    },
+},
     -- {
         -- "nvim-neorg/neorg",
         -- build = ":Neorg sync-parsers",
@@ -1035,7 +1062,7 @@ vim.keymap.set("n", "<C-n>", function() ui.nav_file(4) end, { desc = "Harpoon Fi
 
 -- Fugitive shortcuts
 -- vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git Status" })
-vim.keymap.set("n", "<leader>gf", "<cmd>Gdiff<CR>", { desc = "Git Diff" })
+-- vim.keymap.set("n", "<leader>gf", "<cmd>Gdiff<CR>", { desc = "Git Diff" })
 vim.keymap.set("n", "<leader>gd", vim.cmd.DiffviewOpen, { desc = "Git Diffview plugin" })
 vim.keymap.set("n", "<leader>gc", "<cmd>DiffviewClose<CR>", { desc = "Git Diffview Close" })
 vim.keymap.set("n", "<leader>gg", "<cmd>DiffviewToggleFiles<CR>", { desc = "Git Diffview Toggle Files" })
@@ -1049,6 +1076,10 @@ vim.keymap.set("n", "<leader>gU", "<cmd>GitBlameOpenFileURL<CR>", { desc = "Git 
 
 -- lazygit
 vim.keymap.set("n", "<leader>gs", vim.cmd.LazyGit)
+-- advanced git search
+vim.keymap.set("n", "<leader>gf", "<cmd>AdvancedGitSearch search_log_content_file<CR>", { desc = "AdvancedGitSearch file" })
+vim.keymap.set("n", "<leader>ga", "<cmd>AdvancedGitSearch search_log_content<CR>", { desc = "AdvancedGitSearch repo" })
+
 
 vim.api.nvim_set_var("NERDSpaceDelims", 1);
 -- shortcuts to toggle
