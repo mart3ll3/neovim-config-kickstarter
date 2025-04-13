@@ -1080,6 +1080,8 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.LazyGit)
 vim.keymap.set("n", "<leader>gf", "<cmd>AdvancedGitSearch search_log_content_file<CR>", { desc = "AdvancedGitSearch file" })
 vim.keymap.set("n", "<leader>ga", "<cmd>AdvancedGitSearch search_log_content<CR>", { desc = "AdvancedGitSearch repo" })
 
+vim.keymap.set("n", "<leader>gm", vim.cmd.GitBlameOpenCommitURL, { desc = "Git Open Commit Url" })
+vim.keymap.set("n", "<leader>gM", vim.cmd.GitBlameOpenFileURL, { desc = "Git Open File Url" })
 
 vim.api.nvim_set_var("NERDSpaceDelims", 1);
 -- shortcuts to toggle
@@ -1094,13 +1096,13 @@ vim.keymap.set("n", "<leader>cf", "0<c-g>", { desc = "Show full file path" })
 vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { desc = "ToggleTerm float" })
 vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { desc = "ToggleTerm float" })
 
-vim.keymap.set("n", "m", function() require("hop") vim.cmd("silent! HopWord") end, { desc = "Hop to word" })
-vim.keymap.set("x", "m", function() require("hop") vim.cmd("silent! HopWord") end, { desc = "Hop to word" })
+vim.keymap.set("n", "s", function() require("hop") vim.cmd("silent! HopWord") end, { desc = "Hop to word" })
+vim.keymap.set("x", "s", function() require("hop") vim.cmd("silent! HopWord") end, { desc = "Hop to word" })
 
-vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
-vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
-vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
-vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
+vim.keymap.set("n", "m", require('substitute').operator, { noremap = true })
+vim.keymap.set("n", "mm", require('substitute').line, { noremap = true })
+vim.keymap.set("n", "M", require('substitute').eol, { noremap = true })
+vim.keymap.set("x", "m", require('substitute').visual, { noremap = true })
 
       -- Open parent directory in current window
       -- vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
