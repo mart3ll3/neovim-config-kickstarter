@@ -257,22 +257,26 @@ require('lazy').setup({
   },
   {
     'mfussenegger/nvim-dap',
-    event = "VeryLazy",
+    lazy = true,
+    -- event = "VeryLazy",
   },
   {
     'rcarriga/nvim-dap-ui',
-    event = "VeryLazy",
+    lazy = true,
+    -- event = "VeryLazy",
   },
   {
     'leoluz/nvim-dap-go',
-    event = "VeryLazy",
+    lazy = true,
+    -- event = "VeryLazy",
   },
 
   {
     'akinsho/toggleterm.nvim',
+    lazy = true,
     version = "*",
     -- opts = {[> things you want to change go here<]},
-    event = "VeryLazy",
+    -- event = "VeryLazy",
   },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
@@ -450,7 +454,8 @@ require('lazy').setup({
   },
   {
     "Wansmer/treesj",
-    event = "VeryLazy",
+    lazy = true,
+    -- event = "VeryLazy",
   },
   -- {"simrat39/symbols-outline.nvim"},
   -- {
@@ -459,7 +464,8 @@ require('lazy').setup({
   -- },
   {
     "godlygeek/tabular",
-    event = "VeryLazy",
+    lazy = true,
+    -- event = "VeryLazy",
   },
   {
     "kdheepak/lazygit.nvim",
@@ -479,11 +485,21 @@ require('lazy').setup({
       -- refer to the configuration section below
     },
   },
+
   {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
+    -- lazy = true,
+    opts = {
+      merge_tool = {
+            -- Config for conflicted files in diff views during a merge or rebase.
+            layout = "diff3_mixed",
+          },
+    },
+    config = function(_, opts)
+      require("diffview").setup(opts)
+    end,
   },
-
 
 
   {
@@ -559,7 +575,7 @@ require('lazy').setup({
   dependencies = { { "echasnovski/mini.icons", opts = {} } },
   -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-  lazy = false,
+  lazy = true,
 },
 
   {
@@ -662,7 +678,8 @@ require('lazy').setup({
   },
   {
     "nvim-neotest/neotest",
-    event = "VeryLazy",
+    lazy = true,
+    -- event = "VeryLazy",
     cmd = { "Neotest" },
     dependencies = {
       "nvim-neotest/nvim-nio",
@@ -1017,10 +1034,11 @@ vim.keymap.set("n", "<C-s>", function() ui.nav_file(3) end, { desc = "Harpoon Fi
 vim.keymap.set("n", "<C-n>", function() ui.nav_file(4) end, { desc = "Harpoon File #4" })
 
 -- Fugitive shortcuts
-vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git Status" })
+-- vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git Status" })
 vim.keymap.set("n", "<leader>gf", "<cmd>Gdiff<CR>", { desc = "Git Diff" })
-vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Git Diffview plugin" })
+vim.keymap.set("n", "<leader>gd", vim.cmd.DiffviewOpen, { desc = "Git Diffview plugin" })
 vim.keymap.set("n", "<leader>gc", "<cmd>DiffviewClose<CR>", { desc = "Git Diffview Close" })
+vim.keymap.set("n", "<leader>gg", "<cmd>DiffviewToggleFiles<CR>", { desc = "Git Diffview Toggle Files" })
 vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<CR>", { desc = "Git Blame" })
 vim.keymap.set("n", "<leader>gP", "<cmd>Git push<CR>", { desc = "Git Push" })
 vim.keymap.set("n", "<leader>gp", "<cmd>Git pull<CR>", { desc = "Git Pull" })
