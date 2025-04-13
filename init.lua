@@ -1,4 +1,8 @@
 --[[
+vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
+vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
+vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
+vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
 --
 --
 --aasdk
@@ -94,21 +98,21 @@ require('lazy').setup({
     'RishabhRD/popfix',
     event = "VeryLazy",
   },
-  {
-    'RishabhRD/nvim-cheat.sh',
-    event = "VeryLazy",
-  },
+  -- {
+    -- 'RishabhRD/nvim-cheat.sh',
+    -- event = "VeryLazy",
+  -- },
   {
     'nvim-lua/plenary.nvim',
     event = "VeryLazy",
   },
   {
     'nvim-pack/nvim-spectre',
-    event = "VeryLazy",
+    lazy = true,
   },
   {
     'ThePrimeagen/harpoon',
-    event = "VeryLazy",
+    lazy = true,
   },
   -- 'prichrd/netrw.nvim',
   -- {
@@ -125,31 +129,49 @@ require('lazy').setup({
     event = "VeryLazy",
   },
   {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end,       desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o",               function() require("flash").remote() end,     desc = "Remote Flash" },
-      {
-        "R",
-        mode = { "o", "x" },
-        function() require("flash").treesitter_search() end,
-        desc =
-        "Treesitter Search"
-      },
-      {
-        "<c-s>",
-        mode = { "c" },
-        function() require("flash").toggle() end,
-        desc =
-        "Toggle Flash Search"
-      },
-    },
+    "smoka7/hop.nvim",
+    lazy = true,
+    cmd = { "HopWord" },
+    opts = { keys = "etovxqpdygfblzhckisuran" }
   },
+  {
+      "gbprod/substitute.nvim",
+      event = "InsertEnter",
+      opts = {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+      },
+      config = function(_, opts)
+        require("substitute").setup(opts)
+      end,
+  },
+  -- {
+    -- "folke/flash.nvim",
+    -- event = "VeryLazy",
+    -- ---@type Flash.Config
+    -- opts = {},
+    -- -- stylua: ignore
+    -- keys = {
+      -- { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end,       desc = "Flash" },
+      -- { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      -- { "r", mode = "o",               function() require("flash").remote() end,     desc = "Remote Flash" },
+      -- {
+        -- "R",
+        -- mode = { "o", "x" },
+        -- function() require("flash").treesitter_search() end,
+        -- desc =
+        -- "Treesitter Search"
+      -- },
+      -- {
+        -- "<c-s>",
+        -- mode = { "c" },
+        -- function() require("flash").toggle() end,
+        -- desc =
+        -- "Toggle Flash Search"
+      -- },
+    -- },
+  -- },
 
   {
     "rcarriga/nvim-notify",
@@ -1023,6 +1045,14 @@ vim.keymap.set("n", "<leader>cf", "0<c-g>", { desc = "Show full file path" })
 vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { desc = "ToggleTerm float" })
 vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { desc = "ToggleTerm float" })
 
+vim.keymap.set("n", "m", function() require("hop") vim.cmd("silent! HopWord") end, { desc = "Hop to word" })
+vim.keymap.set("x", "m", function() require("hop") vim.cmd("silent! HopWord") end, { desc = "Hop to word" })
+
+vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
+vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
+vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
+vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
+
       -- Open parent directory in current window
       -- vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
@@ -1539,7 +1569,7 @@ require('lualine').setup {
 
 
 require("nvim-surround")
-require("flash").toggle(false)
+-- require("flash").toggle(false)
 -- require'netrw'.setup{
 --   -- Put your configuration here, or leave the object empty to take the default
 --   -- configuration.
