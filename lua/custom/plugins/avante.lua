@@ -31,8 +31,7 @@ return {
     -- end,
     -- },
     -- },
-    provider = "lmstudio",
-    auto_suggestions_provider = "lmstudio",
+    provider = "copilotClaude",
     vendors = {
       lmstudio = {
         __inherited_from = "openai",
@@ -46,6 +45,18 @@ return {
         endpoint = "http://127.0.0.1:11434/v1",
         model = "codegemma",
       },
+       copilot = {
+          __inherited_from = "copilot",
+          model = "claude-3-7-sonnet-latest",
+        },
+       copilotFlash = {
+          __inherited_from = "copilot",
+          model = "gemini-2.0-flash-001",
+        },
+        copilotClaude = {
+          __inherited_from = "copilot",
+          model = "claude-3.7-sonnet",
+        },
     },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -80,7 +91,7 @@ return {
       },
     },
     behaviour = {
-      auto_suggestions = true,
+      auto_suggestions = false,
       auto_set_highlight_group = true,
       auto_set_keymaps = true,
       auto_apply_diff_after_generation = false,
@@ -106,3 +117,4 @@ return {
     },
   },
 }
+

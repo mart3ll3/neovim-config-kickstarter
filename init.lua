@@ -623,6 +623,31 @@ require('lazy').setup({
           "tpope/vim-rhubarb",       --- See dependencies
     },
 },
+
+{
+  "zbirenbaum/copilot.lua",
+  cmd = "Copilot",
+  event = "InsertEnter",
+  config = function()
+    require("copilot").setup({
+        suggestion = {
+            enabled = true,
+            auto_trigger = true,
+            hide_during_completion = true,
+            debounce = 75,
+            trigger_on_accept = true,
+            keymap = {
+              accept = "<C-y>",
+              accept_word = false,
+              accept_line = false,
+              next = false, --"<M-]>",
+              prev = false, --"<M-[>",
+              dismiss = false, --"<C-]>",
+            },
+          },
+      })
+  end,
+},
     -- {
         -- "nvim-neorg/neorg",
         -- build = ":Neorg sync-parsers",
@@ -1231,6 +1256,8 @@ vim.keymap.set("n", "<c-g>", "<cmd>lua jumps_fileCO()<cr>", { desc = "Prev buffe
 -- vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end)
 -- vim.keymap.set('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end)
 -- vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+
+vim.keymap.set("n", "<leader>ac", "<cmd>AvanteClear<cr>", { desc = "Avante Clear" })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
