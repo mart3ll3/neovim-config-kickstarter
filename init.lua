@@ -624,6 +624,7 @@ require('lazy').setup({
     },
 },
 
+
 {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
@@ -648,6 +649,60 @@ require('lazy').setup({
       })
   end,
 },
+
+
+  {
+    "zeioth/compiler.nvim",
+    cmd = {
+      "CompilerOpen",
+      "CompilerToggleResults",
+      "CompilerRedo",
+      "CompilerStop"
+    },
+    dependencies = { "stevearc/overseer.nvim" },
+    opts = {},
+  },
+
+  {
+    "stevearc/overseer.nvim",
+    cmd = {
+      "CompilerOpen", 
+      "CompilerToggleResults", 
+      "CompilerRedo",
+      "OverseerOpen",
+      "OverseerClose",
+      "OverseerToggle",
+      "OverseerSaveBundle",
+      "OverseerLoadBundle",
+      "OverseerDeleteBundle",
+      "OverseerRunCmd",
+      "OverseerRun",
+      "OverseerInfo",
+      "OverseerBuild",
+      "OverseerQuickAction",
+      "OverseerTaskAction",
+      "OverseerClearCache"
+    },
+    opts = {
+     task_list = { -- the window that shows the results.
+        direction = "bottom",
+        min_height = 25,
+        max_height = 25,
+        default_detail = 1,
+      },
+      -- component_aliases = {
+      --   default = {
+      --     -- Behaviors that will apply to all tasks.
+      --     "on_exit_set_status",                   -- don't delete this one.
+      --     "on_output_summarize",                  -- show last line on the list.
+      --     "display_duration",                     -- display duration.
+      --     "on_complete_notify",                   -- notify on task start.
+      --     "open_output",                          -- focus last executed task.
+      --     { "on_complete_dispose", timeout=300 }, -- dispose old tasks.
+      --   },
+      -- },
+    },
+  },
     -- {
         -- "nvim-neorg/neorg",
         -- build = ":Neorg sync-parsers",
@@ -1042,7 +1097,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
-vim.o.guifont = "JetBrainsMono Nerd Font:h17"
+vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 vim.o.lines = 999
 vim.o.columns = 999
 vim.o.cursorline = true
@@ -1090,15 +1145,18 @@ vim.keymap.set("n", "<leader>u", function() require("telescope").extensions.undo
 
 
 
+vim.keymap.set("n", "<C-a>", vim.cmd("normal! gg0vG$"), { desc = "Visually select all" })
+
+
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go Window to the left" })
 vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = "Go Window to the left" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go Window to the down" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go Window to the up" })
+vim.keymap.set("n", "<C-Down>", "<C-w>j", { desc = "Go Window to the down" })
+vim.keymap.set("n", "<C-Up>", "<C-w>k", { desc = "Go Window to the up" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go Window to the right" })
 vim.keymap.set("n", "<C-Right>", "<C-w>l", { desc = "Go Window to the right" })
 -- Resize with arrows
-vim.keymap.set("n", "<C-Up>", ":horizontal resize +2<CR>")
-vim.keymap.set("n", "<C-Down>", ":horizontal resize -2<CR>")
+vim.keymap.set("n", "<C-k>", ":horizontal resize +2<CR>")
+vim.keymap.set("n", "<C-j>", ":horizontal resize -2<CR>")
 -- vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
 -- vim.keymap.set("n", "<C-m>", ":vertical resize +2<CR>")
 -- vim.keymap.set("n", "<C-,>", ":horizontal resize +2<CR>")
@@ -1252,12 +1310,17 @@ end
 -- vim.keymap.set("n", "<c-;>", "<cmd>lua jumps_fileCO('forward')<cr>", { desc = "Next buffer in jump list" })
 vim.keymap.set("n", "<c-g>", "<cmd>lua jumps_fileCO()<cr>", { desc = "Prev buffer in jump list" })
 
+vim.keymap.set("n", "<leader>ad", "<cmd>AvanteClear<cr>", { desc = "Avante Clear" })
+
+vim.keymap.set("n", "<leader>mm", function() vim.cmd("CompilerOpen") end, { desc = "Open compiler" })
+vim.keymap.set("n", "<leader>mr", function() vim.cmd("CompilerRedo") end, { desc = "Compiler redo" })
+vim.keymap.set("n", "<leader>mt", function() vim.cmd("CompilerToggleResults") end, { desc = "Compiler results" })
+
+
 -- vim.keymap.set('i', '<C-y>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
 -- vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end)
 -- vim.keymap.set('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end)
 -- vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-
-vim.keymap.set("n", "<leader>ac", "<cmd>AvanteClear<cr>", { desc = "Avante Clear" })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -2070,7 +2133,7 @@ require("obsidian").setup({
     {
       name = "Notes",
       -- path = "/Users/omerxx/Obsidian/Notes",
-      path = "~/Documents/Projects/Notes",
+      path = "~/Documents/Projects",
     },
   },
   ui = { enable = false },
