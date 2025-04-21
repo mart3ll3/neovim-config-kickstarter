@@ -445,7 +445,7 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   {
     'folke/which-key.nvim',
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     opts = {}
   },
   {
@@ -833,6 +833,50 @@ require('lazy').setup({
       -- },
     },
   },
+{
+  "stevearc/conform.nvim",
+  cond = not vim.g.vscode,
+  lazy = true,
+  event = { "BufWritePre" },
+  config = function()
+    require("conform").setup {
+      quiet = true,
+      lsp_fallback = true,
+      formatters_by_ft = {
+        lua = { "stylua" },
+        javascript = { "prettier", "eslint", stop_after_first = true },
+        typescript = { "prettier", "eslint", stop_after_first = true },
+        javascriptreact = { "prettier", "rustywind" },
+        typescriptreact = { "prettier", "rustywind" },
+        svelte = { "prettier", "rustywind" },
+        html = { "prettier", "rustywind" },
+        css = { "prettier" },
+        scss = { "prettier" },
+        less = { "prettier" },
+        json = { "prettier" },
+        jsonc = { "prettier" },
+        yaml = { "prettier" },
+        markdown = { "prettier" },
+        mdx = { "prettier" },
+        graphql = { "prettier" },
+        go = { "gofmt"},
+        cs = { "csharpier" },
+        xml = { "xmlformat" },
+        svg = { "xmlformat" },
+        rust = { "rustfmt" },
+      },
+      formatters = {
+        xmlformat = {
+          cmd = { "xmlformat" },
+          args = { "--selfclose", "-" },
+        },
+        injected = { options = { ignore_errors = false } },
+      },
+    }
+  end,
+},
+
+
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
@@ -1206,7 +1250,11 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>dd", [["_d]])
-vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "[F]ormat Document" })
+-- vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "[F]ormat Document" })
+
+ vim.keymap.set("n", "<leader>ff", function() require("conform").format() end, { desc = "[F]ormat Document" })
+ vim.keymap.set("v", "<leader>ff", function() require("conform").format() end, { desc = "[F]ormat Selection" })
+
 -- vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, { desc = "Show Nvim Tree" })
 vim.keymap.set("n", "<leader>fu", ":NvimTreeResize -10<cr>", { desc = "Make smaller Nvim Tree" })
 vim.keymap.set("n", "<leader>fi", ":NvimTreeResize +10<cr>", { desc = "Enlarge Nvim Tree" })
