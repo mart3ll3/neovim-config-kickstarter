@@ -51,6 +51,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 local utils = require "base.utils"
+require("custom.plugins.dotnet-commands").setup()
 local windows = vim.fn.has('win32') == 1           -- true if on windows
 local android = vim.fn.isdirectory('/system') == 1 -- true if on android
 
@@ -255,21 +256,145 @@ require('lazy').setup({
       }
     end
   },
+
   {
-    'mfussenegger/nvim-dap',
-    lazy = true,
-    -- event = "VeryLazy",
+    "mfussenegger/nvim-dap",
+    config = function()
+      local dap, dapui = require "dap", require "dapui"
+      dap.set_log_level "TRACE"
+
+      dap.listeners.after.event_initialized.dapui_config = function()
+        dapui.open()
+        vim.cmd("colorscheme " .. vim.g.colors_name)
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+
+      vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticError", linehl = "DapBreakpoint", numhl = "" })
+      vim.fn.sign_define("DapStopped", { text = "󰳟", texthl = "", linehl = "DapStopped", numhl = "" })
+
+      require("custom.plugins.netcore").register_net_dap()
+    end,
+    keys = {
+      -- stylua: ignore start
+      {"<leader>dc", function() require("dap").continue() end, noremap = true, silent = true, desc = "continue",},
+      {"<leader>do", function() require("dap").step_over() end, noremap = true, silent = true, desc = "step over",},
+      {"<leader>di", function() require("dap").step_into() end, noremap = true, silent = true, desc = "step into",},
+      {"<leader>du", function() require("dap").step_out() end, noremap = true, silent = true, desc = "step out",},
+      {"<leader>dr", function() require("dap").restart() end, noremap = true, silent = true, desc = "restart",},
+      {"<leader>dt", function() require("dap").terminate() end, noremap = true, silent = true, desc = "terminate",},
+      {"<leader>db", function() require("dap").toggle_breakpoint() end, noremap = true, silent = true, desc = "toggle breakpoint",},
+      -- stylua: ignore end
+    },
+    dependencies = {
+      { "jbyuki/one-small-step-for-vimkind" },
+      { "nvim-neotest/nvim-nio" },
+      {
+        "rcarriga/nvim-dap-ui",
+        config = function()
+          require("dapui").setup {
+            icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+            mappings = { expand = { "<CR>" }, open = "o", remove = "d", edit = "e", repl = "r", toggle = "t" },
+            element_mappings = {},
+            expand_lines = true,
+            force_buffers = true,
+            layouts = {
+              {
+                elements = { { id = "scopes", size = 0.33 }, { id = "repl", size = 0.66 } },
+                size = 10,
+                position = "bottom",
+              },
+              {
+                elements = { "breakpoints", "console", "stacks", "watches" },
+                size = 45,
+                position = "right",
+              },
+            },
+            floating = {
+              max_height = nil,
+              max_width = nil,
+              border = "single",
+              mappings = { ["close"] = { "q", "<Esc>" } },
+            },
+            controls = {
+              enabled = vim.fn.exists "+winbar" == 1,
+              element = "repl",
+              icons = {
+                pause = "",
+                play = "",
+                step_into = "",
+                step_over = "",
+                step_out = "",
+                step_back = "",
+                run_last = "",
+                terminate = "",
+                disconnect = "",
+              },
+            },
+            render = { max_type_length = nil, max_value_lines = 100, indent = 1 },
+          }
+        end,
+      },
+    },
   },
+
   {
-    'rcarriga/nvim-dap-ui',
+    "GustavEikaas/easy-dotnet.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    ft = { "cs", "vb", "csproj", "sln", "slnx", "props", "csx", "targets" },
     lazy = true,
-    -- event = "VeryLazy",
+    cmd = "Dotnet",
+    opts = {
+      terminal = function(path, action)
+        local commands = {
+          run = function()
+            return "dotnet run --project " .. path
+          end,
+          test = function()
+            return "dotnet test " .. path
+          end,
+          restore = function()
+            return "dotnet restore " .. path
+          end,
+          build = function()
+            return "dotnet build " .. path
+          end,
+        }
+        local cmd = commands[action]() .. "\r"
+        Snacks.terminal.open(cmd)
+      end,
+      test_runner = {
+        viewmode = "float",
+        icons = {
+          project = "󰗀",
+        },
+      },
+    },
+    keys = {
+      -- stylua: ignore start 
+      -- { "<leader>nb", function() require("easy-dotnet").build_default_quickfix() end, desc = "build" },
+      { "<leader>nB", function() require("easy-dotnet").build_quickfix() end, desc = "build solution" },
+      { "<leader>nr", function() require("easy-dotnet").run_default() end, desc = "run" },
+      { "<leader>nR", function() require("easy-dotnet").run_solution() end, desc = "run solution" },
+      { "<leader>nx", function() require("easy-dotnet").clean() end, desc = "clean solution" },
+      { "<leader>na", "<cmd>Dotnet new<cr>", desc = "new item" },
+      { "<leader>nt", "<cmd>Dotnet testrunner<cr>", desc = "open test runner" },
+      -- stylua: ignore end
+    },
   },
   {
     'leoluz/nvim-dap-go',
     lazy = true,
     -- event = "VeryLazy",
   },
+
 
   {
     'akinsho/toggleterm.nvim',
@@ -372,6 +497,8 @@ require('lazy').setup({
   },
 { "Mofiqul/dracula.nvim",
   event = "VeryLazy"},
+{ "EdenEast/nightfox.nvim",
+  event = "VeryLazy"}, 
 {
   "vague2k/vague.nvim",
     event = "VeryLazy",
@@ -1915,6 +2042,14 @@ require("themery").setup({
       ]],
     },
     {
+      name = "Dayfox",
+      colorscheme = "dayfox",
+    },
+    {
+      name = "Dawnfox",
+      colorscheme = "dawnfox",
+    },
+    {
       name = "Gruvbox dark",
       colorscheme = "gruvbox",
       before = [[
@@ -1977,6 +2112,26 @@ require("themery").setup({
     {
       name = "Vague",
       colorscheme = "vague",
+    },
+    {
+      name = "Nightfox",
+      colorscheme = "nightfox",
+    },
+    {
+      name = "Duskfox",
+      colorscheme = "duskfox",
+    },
+    {
+      name = "Nordfox",
+      colorscheme = "nordfox",
+    },
+    {
+      name = "Terafox",
+      colorscheme = "terafox",
+    },
+    {
+      name = "Carbonfox",
+      colorscheme = "carbonfox",
     },
   },
   -- themeConfigFile = "~/.config/nvim/lua/custom/plugins/theme.lua", -- Described below
