@@ -1279,7 +1279,7 @@ vim.keymap.set("n", "<leader>u", function() require("telescope").extensions.undo
 
 
 
-vim.keymap.set("n", "<C-a>", vim.cmd("normal! gg0vG$"), { desc = "Visually select all" })
+vim.keymap.set("n", "<C-a>", function() vim.cmd("normal! gg0vG$") end, { desc = "Visually select all" })
 
 
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go Window to the left" })
