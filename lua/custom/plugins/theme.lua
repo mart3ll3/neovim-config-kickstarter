@@ -4,6 +4,6 @@
 vim.opt.background = "dark"
 
 
-vim.cmd("colorscheme kanagawa-wave")
-vim.g.theme_id = 9 
+vim.cmd("colorscheme dracula")
+vim.g.theme_id = 19 
 -- end themery block
