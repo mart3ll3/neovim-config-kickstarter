@@ -1489,6 +1489,24 @@ vim.keymap.set('n', '<leader>mt', function()
   vim.cmd 'CompilerToggleResults'
 end, { desc = 'Compiler results' })
 
+
+vim.keymap.set('n', '<leader>nn', '<cmd>ObsidianNew<cr>', { desc = 'Obsidian New Note' })
+vim.keymap.set('n', '<leader>nf', '<cmd>ObsidianSearch<cr>', { desc = 'Obsidian Search' })
+vim.keymap.set('n', '<leader>nk', '<cmd>ObsidianFollowLink<cr>', { desc = 'Obsidian Follow Link' })
+vim.keymap.set('n', '<leader>nb', '<cmd>ObsidianBacklinks<cr>', { desc = 'Obsidian Backlinks' })
+vim.keymap.set('n', '<leader>nt', '<cmd>ObsidianToday<cr>', { desc = 'Obsidian Today' })
+vim.keymap.set('n', '<leader>nw', '<cmd>ObsidianTomorrow<cr>', { desc = 'Obsidian Tomorrow' })
+vim.keymap.set('n', '<leader>ny', '<cmd>ObsidianYesterday<cr>', { desc = 'Obsidian Yesterday' })
+vim.keymap.set('n', '<leader>nl', '<cmd>ObsidianLink<cr>', { desc = 'Obsidian Link' })
+vim.keymap.set('n', '<leader>ni', '<cmd>ObsidianLinkNew', { desc = 'Obsidian Link New' })
+vim.keymap.set('n', '<leader>ne', '<cmd>ObsidianExtractNote', { desc = 'Obsidian Extract Note' })
+vim.keymap.set('n', '<leader>nr', '<cmd>ObsidianRename', { desc = 'Obsidian Rename Note' })
+vim.keymap.set('n', '<leader>nc', '<cmd>ObsidianToggleCheckbox<cr>', { desc = 'Obsidian Toggle CheckBox' })
+vim.keymap.set('n', '<leader>nm', '<cmd>ObsidianNewFromTemplate', { desc = 'Obsidian New From Template' })
+vim.keymap.set('n', '<leader>no', '<cmd>ObsidianTOC<cr>', { desc = 'Obsidian Table of Contents' })
+vim.keymap.set('n', '<leader>ng', '<cmd>ObsidianTags<cr>', { desc = 'Obsidian Tags' })
+
+
 -- vim.keymap.set('i', '<C-y>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
 -- vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end)
 -- vim.keymap.set('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end)
@@ -1642,11 +1660,11 @@ require('nvim-treesitter.configs').setup {
     },
     swap = {
       enable = true,
-      swap_next = {
-        ['<leader>na'] = '@parameter.inner', -- swap parameters/argument with next
-        ['<leader>n:'] = '@property.outer', -- swap object property with next
-        ['<leader>nm'] = '@function.outer', -- swap function with next
-      },
+      -- swap_next = {
+        -- ['<leader>na'] = '@parameter.inner', -- swap parameters/argument with next
+        -- ['<leader>n:'] = '@property.outer', -- swap object property with next
+        -- ['<leader>nm'] = '@function.outer', -- swap function with next
+      -- },
       swap_previous = {
         ['<leader>pa'] = '@parameter.inner', -- swap parameters/argument with prev
         ['<leader>p:'] = '@property.outer', -- swap object property with prev
